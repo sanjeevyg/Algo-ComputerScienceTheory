@@ -152,11 +152,14 @@ ll.addHead(300)
 ll.addTail(400)
 ll.addAt(2, 500)
 
-ll.printListValue()
+// ll.printListValue()
 
-ll.getAt(3)
+console.log(ll.head)
+
+// ll.getAt(3)
 // ll.removeHead()
+// ll.removeAtIndex(3)
+// console.log("break")
 // ll.removeTail()
-ll.removeAtIndex(3)
-ll.printListValue()
+// ll.printListValue()
 // ll.search(300)
