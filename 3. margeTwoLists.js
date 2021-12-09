@@ -33,10 +33,6 @@ var mergeTwoLists = function(list1, list2) {
             current.next = new ListNode(list1.val)
             current = current.next
             list1 = list1.next 
-            
-            // current.next = new ListNode(list2.val)
-            // current = current.next
-            // list2 = list2.next 
             console.log("fourth")
             
         } else if(list2.val < list1.val){
@@ -44,12 +40,6 @@ var mergeTwoLists = function(list1, list2) {
             current.next = new ListNode(list2.val)
             current = current.next
             list2 = list2.next 
-
-            // if(list1.next)
-            
-            // current.next = new ListNode(list1.val)
-            // current = current.next
-            // list1 = list1.next 
             console.log("fifth")
         }
      }
