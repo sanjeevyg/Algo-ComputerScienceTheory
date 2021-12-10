@@ -1,30 +1,29 @@
-const hash = (key, size) => {
-    let hashedkey = 0;
+function hash(key, size) {
+    let hashedKey = 0;
     for(let i = 0; i < key.length; i++) {
-        hashedkey += key.charCodeAt(i)   
+        hashedKey += key.charCodeAt(i)
     }
-    console.log(hashedkey)
-    return hashedkey % size
+    console.log(hashedKey)
+    return hashedKey % size
 }
+
 
 class HashTable {
     constructor() {
         this.size = 20;
         this.buckets = Array(this.size)
 
-        for (let i = 0; i < this.buckets.length; i++) {
+        for(let i = 0; i < this.buckets.length; i++) {
             this.buckets[i] = new Map()
         }
     }
-
-
+    
     insert(key, value) {
         let idx = hash(key, this.size)
         this.buckets[idx].set(key, value)
     }
 
-
-    remove(key) {
+    delete(key) {
         let idx = hash(key, this.size)
         let deleted = this.buckets[idx].get(key)
         this.buckets[idx].delete(key)
@@ -35,21 +34,14 @@ class HashTable {
         let idx = hash(key, this.size)
         return this.buckets[idx].get(key)
     }
-}
+} 
+
+let newHash = new HashTable()
+
+newHash.insert("Colorado", "mountains")
+newHash.insert("utah", "desert")
+newHash.insert("Atlanta", "forest")
+newHash.insert("Newyork", "skyscrapers")
 
 
-const hashTable = new HashTable()
-
-hashTable.insert('Messi', "751 goals")
-hashTable.insert('Ronaldo', "800 goals")
-hashTable.insert('Pele', "733 goals")
-hashTable.insert('Maradona', "250 goals")
-hashTable.insert('Gerd Muller', "566 goals")
-
-// console.log(hashTable.search("Maradona"))
-console.log(hashTable)
-
-// console.log(hash("Messi", 20))
-
-
-
+console.log(newHash)
