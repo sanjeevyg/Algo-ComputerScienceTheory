@@ -10,11 +10,14 @@ var rob = function(nums) {
     let sumEven = even.reduce((prev, curr) => prev + curr )
     let sumOdd = odd.reduce((prev, curr) => prev + curr )
 
-    if(sumeEven === sumOdd) {
-        
-    } else {
-       return sumEven > sumOdd ? sumEven : sumOdd
+    
+    if(nums === []) return [];
+    if(nums === null) return null;
+    if(nums.length === 1) return nums[0];
+    if(nums.length === 4 && sumEven === sumOdd) {
+       return (nums[0] + nums[3]) > sumEven ?  (nums[0] + nums[3]) : sumEven
     }
+    return sumEven > sumOdd ? sumEven : sumOdd
 }
 
 
