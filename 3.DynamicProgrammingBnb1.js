@@ -24,6 +24,11 @@ function fib(n, memo = {}) {
 // console.log(fib(7))
 // console.log(fib(50))
 
+
+/* Say that you are a traveler on a 2D grid. You begin in the top-left corner and your goal is to travle to the bottom-right corner. You may only move down or right.
+In how many ways can you travel to the goal on a grid with dimensions m * n? */
+
+
 function travelGrid(m, n, memo = {}) {
     let key = m + ',' + n
     if(key in memo) return memo[key]
@@ -70,20 +75,29 @@ console.log(canSum(100,arr2))
 console.log(canSum(1000, arr3)) */
 
 
+/* Write a function `canSum(targetSum, numbers)` that takes in a targetsum and an array of numbers as arguments.indexOf
+
+The function should return a boolean indicatig whether or not it is possible to generate the targetSum using numbers from the array.
+You may use an element of the array as many times as needed.indexOf
+
+You may assume that all input numbers are nonnegative.
+ */
+
+
 const howSum = (targetSum, numbers, memo={}) => {
     if(targetSum in memo) return memo[targetSum]
     if(targetSum === 0) return [];
     if(targetSum < 0 ) return null;
-
+    
     for (let num of numbers) {
         const remainder = targetSum - num
         const remainderResult = howSum(remainder, numbers, memo)
         if(remainderResult != null ) {
-           memo[targetSum] = [...remainderResult, num]
+            memo[targetSum] = [...remainderResult, num]
             return memo[targetSum]
         }
     }
-
+    
     memo[targetSum] = null
     return null
 }
@@ -94,16 +108,17 @@ const bestSum = (targetSum, numbers, memo={}) => {
     if(targetSum in memo) return memo[targetSum]
     if(targetSum === 0) return [];
     if(targetSum < 0 ) return null;
-    let shortestCom = null
 
+    let shortestCom = null
+    
     for (let num of numbers) {
         const remainder = targetSum - num
         const remainderResult = bestSum(remainder, numbers, memo)
-        if(remainderResult != null ) {
-           combination = [...remainderResult, num]
-           if(shortestCom === null || combination.length < shortestCom.length ) {
-               shortestCom = combination
-           }
+        if(remainderResult !== null ) {
+            combination = [...remainderResult, num]
+            if(shortestCom === null || combination.length < shortestCom.length ) {
+                shortestCom = combination
+            }
         }
     }
     memo[targetSum] = shortestCom
@@ -125,15 +140,15 @@ You may reuse elements of `wordBank` as many times a needed. */
 const canConstruct = (targetString, wordBank, memo={}) => {
     if(targetString in memo) return memo[targetString];
     if(targetString === "") return true 
-
+    
     for(let str of wordBank) {
         if(targetString.indexOf(str) === 0) {
-        let suffix = targetString.slice(str.length) 
+            let suffix = targetString.slice(str.length) 
         if (canConstruct(suffix, wordBank, memo)) {
             memo[targetString] = true
             return memo[targetString]
         }
-        }
+    }
     }
     memo[targetString] = false
     return false
@@ -154,7 +169,7 @@ const canConstruct = (targetString, wordBank, memo={}) => {
 The function should return the number of ways that the `target` can be constructed by concatenating elements of the `wordBank` array.
 
 You myay resue elements of `wordBank` as many times as needed.
- */
+*/
 
 
 const countConstruct = (target, wordBank, memo={}) => {
@@ -163,8 +178,8 @@ const countConstruct = (target, wordBank, memo={}) => {
     let count = 0;
     for(let str of wordBank){
         if(target.indexOf(str) === 0) {
-           const numOfWay = countConstruct(target.slice(str.length), wordBank, memo)
-           count += numOfWay;
+            const numOfWay = countConstruct(target.slice(str.length), wordBank, memo)
+            count += numOfWay;
         }
     }
     memo[target] = count
@@ -187,25 +202,154 @@ You may resuse elements of `wordBank` as many time as needed.
 
 const allConstruct = (target, wordBank, memo={}) => {
     if(target in memo) return memo[target] 
-
+    
     if(target === "") return [[]];
-
+    
     let combination = []
-     
+    
     for(let str of wordBank) {
         if(target.indexOf(str) === 0) {
-         let suffix = target.slice(str.length)
-         let suffixWays = allConstruct(suffix, wordBank, memo)
-         let suffixAr = suffixWays.map(way => [str, ...way])
-         combination.push(...suffixAr)
+            let suffix = target.slice(str.length)
+            let suffixWays = allConstruct(suffix, wordBank, memo)
+            let suffixAr = suffixWays.map(way => [str, ...way])
+            combination.push(...suffixAr)
         }
     }
     memo[target] = combination
     return combination
 }
 
-let ar1 = ["ab", "abc", "cd", "def", "abcd"]
+/* let ar1 = ["ab", "abc", "cd", "def", "abcd"]
 console.log(allConstruct("abcdef", ar1)) 
-// console.log(allConstruct("enterapotentpot", ar2)) 
-// console.log(allConstruct("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
-// console.log(allConstruct("enterapotentpot", ar2)) 
+console.log(allConstruct("enterapotentpot", ar2)) 
+console.log(allConstruct("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
+console.log(allConstruct("enterapotentpot", ar2))  */
+
+
+// ......................................................................................................................
+
+/* Tabulation Strategy:
+
+- visulaize the problem as a tabel 
+- size the table based on the inputs
+- initialize the table with default values 
+- seed the trivial answer into the table 
+- iterate through the table 
+- fill further positions based on the current position */
+
+const newfib = (n) => {
+    const table = Array(n + 1).fill(0);
+    table[1] = 1;
+    
+    for(let i = 0; i <= n; i++){
+        table[i + 1] += table[i];
+        console.log("line 221", `count -> ${i}`, table[i + 1])
+        table[i + 2] += table[i];
+        console.log("line 223", `count -> ${i}`, table[i + 2])
+    }
+    return table[n]
+}
+
+
+/* Say that you are a traveler on a 2D grid. You begin in the top-left corner and your goal is to travle to the bottom-right corner. You may only move down or right.
+In how many ways can you travel to the goal on a grid with dimensions m * n? */
+
+const gridTraveler = (m, n) => {
+    let table = Array(m + 1)
+    .fill()
+    .map(() => Array(n + 1).fill(0))
+    
+    table[1][1] = 1
+    
+    for( let i= 0; i <=m; i++) {
+        for(let j=0; j<=n; j++) {
+            let current = table[i][j]
+            if((i + 1) <= m) {table[i + 1][j] += current}
+            if((j + 1) <= n) {table[i][j + 1] += current}
+        }
+    }
+    return table[m][n]
+}
+
+
+// console.log(gridTraveler(3, 3))
+
+
+
+/* Write a function `canSum(targetSum, numbers)` that takes in a targetsum and an array of numbers as arguments.indexOf
+
+The function should return a boolean indicatig whether or not it is possible to generate the targetSum using numbers from the array.
+You may use an element of the array as many times as needed.indexOf
+
+You may assume that all input numbers are nonnegative.
+ */
+
+
+const canSumT = (targetSum, numbers) => {
+    let table = Array(targetSum + 1)
+    .fill(false)
+
+    table[0] = true;
+
+    for(let i = 0; i <= targetSum; i++) {
+        if(table[i] === true) {
+            for(let num of numbers) {
+                table[i + num] = true;
+            }
+        }
+    }
+    return table[targetSum]
+}
+
+// console.log(canSumT(7, [3, 4, 5]))
+
+/* Write a function `howSum(targetSum, numbers)` that takes in a targetSum and an array of numbers as arguments. 
+The function should return an array containing any combination of elements that add up to exactly the targeSum. 
+If there is no combination that adds up to the targetSum, then return null.
+If there are multiple combinations possible, you may return any single one. */
+
+
+const howSumT = (target, numbers) => {
+    let table = Array(target + 1).fill(null);
+    table[0] = [];
+    for(let i = 0; i <= target; i++) {
+        if(table[i] != null) {
+            for(let num of numbers) {
+                table[i + num] = [...table[i], num]
+            }
+        }
+    }
+    return table[target]
+}
+
+
+// console.log(howSumT(7, [2, 3, 3]))
+// console.log(howSumT(5, [2, 1, 3]))
+
+
+/* Write a function `bestSum(targetSum, numbers)` that takes in a targetSum and an array of numbers as arguments. 
+
+The function should return an array containing the shortest combintion of numbers tht add up to exactly the targetSum. 
+
+If there is a tie for the shortest combination, you may return any one of the shortest.
+ */
+
+const bestSumT = (target, numbers) => {
+    let table = Array(target + 1).fill(null)
+    table[0] = []
+
+    for(let i = 0; i <= target; i++) {
+         if(table[i] !== null) {
+            for(let num of numbers) {
+                const combination = [...table[i], num]
+                if( !(table[i + num]) ||  table[i + num].length > combination.length) {
+                    table[i + num] = combination
+                }
+            }
+        }
+    }
+    return table[target]
+}
+
+console.log(bestSumT(9, [2, 3, 5, 4, 7, 2]))
+
