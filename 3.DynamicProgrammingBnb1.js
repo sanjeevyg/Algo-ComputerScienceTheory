@@ -351,5 +351,102 @@ const bestSumT = (target, numbers) => {
     return table[target]
 }
 
-console.log(bestSumT(9, [2, 3, 5, 4, 7, 2]))
+// console.log(bestSumT(9, [2, 3, 5, 4, 7, 2]))
 
+
+
+/* Write a funciton `canConstruct(target, wordBank)` that accepts a target string and an array of strings. 
+
+The function should return a boolean indicating whether or not the `target` can be constructed by concatenating elements of the `wordBank` Array.
+
+You may reuse elements of `wordBank` as many times a needed. */
+
+const canConstructT = (target, wordBank) => {
+    let table = Array(target.length + 1).fill(false);
+
+    table[0] = true;
+
+    for(let i = 0; i <= target.length; i++) {
+        if(table[i] === true) {
+            for(let word of wordBank) {
+                if(target.slice(i, (i + word.length)) === word) {
+                    table[i + word.length] = true;
+                }
+            } 
+        }
+    }
+  return table[target.length]
+}
+
+
+
+
+// console.log(canConstructT("abcdef", ar1)) 
+// console.log(canConstructT("enterapotentpot", ar2)) 
+// console.log(canConstructT("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
+
+
+/* Write a funciton `countConstruct(target, wordBank)` that accepts a target string and an array of strings.
+
+The function should return the number of ways that the `target` can be constructed by concatenating elements of the `wordBank` array.
+
+You myay resue elements of `wordBank` as many times as needed.
+*/
+
+
+const countConstructT = (target, wordBank) => {
+    let table = Array(target.length + 1).fill(0);
+    table[0] = 1;
+    for(let i = 0; i <= target.length; i++) {
+        if(table[i] !== 0) {
+            for( let word of wordBank)
+            if(target.slice(i, i + word.length) === word) {
+                table[i + word.length] = table[i + word.length] + table[i]
+            }
+        }
+    }
+    return table[target.length]
+}
+
+
+
+// let ar1 = ["ab", "abc", "cd", "def", "abcd"]
+// let ar2 = ["a", "p", "ent", "enter", "ot", "o", ]
+
+// console.log(countConstructT("abcdef", ar1)) 
+// console.log(countConstructT("enterapotentpot", ar2)) 
+// console.log(countConstructT("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
+
+
+/* Write a function `allConstruct(target, wordBank)` that accepts a target string and an array of strings.
+
+The funcion should return a 2D array containing all of the ways that the `target` can be contructed by concatenating elements of the `wordBank` array. Each element of the 2D
+array should represent one combination that constructs the `target`.
+
+You may resuse elements of `wordBank` as many time as needed. */
+
+const allConstructT = (target, wordBank) => {
+    let table =  Array(target.length + 1).fill().map(() => [])
+    table[0] = [[]]
+
+    for(let i = 0; i < target.length; i++) {
+        if(table[i] !== null) {
+            for(let word of wordBank) {
+                if(target.slice(i, i + word.length) === word) {
+                    const combination = table[i].map(subarray => [...subarray, word])
+                    table[i + word.length].push(...combination)
+                }
+            }
+        } 
+    }
+    return table[target.length]
+}
+
+
+let ar1 = ["ab", "abc", "c", "cd", "def", "ef",  "abcd"]
+let ar2 = ["a", "p", "ent", "enter", "ot", "o", ]
+
+console.log(allConstructT("abcdef", ar1)) 
+// console.log(allConstructT("enterapotentpot", ar2)) 
+// console.log(allConstructT("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
+// console.log(allConstructT("enterapotentpot", ar2)) 
