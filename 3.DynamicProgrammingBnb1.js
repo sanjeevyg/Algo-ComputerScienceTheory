@@ -447,6 +447,6 @@ let ar1 = ["ab", "abc", "c", "cd", "def", "ef",  "abcd"]
 let ar2 = ["a", "p", "ent", "enter", "ot", "o", ]
 
 console.log(allConstructT("abcdef", ar1)) 
-// console.log(allConstructT("enterapotentpot", ar2)) 
+console.log(allConstructT("enterapotentpot", ar2)) 
 // console.log(allConstructT("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
-// console.log(allConstructT("enterapotentpot", ar2)) 
+console.log(allConstructT("enterapotentpot", ar2)) 
