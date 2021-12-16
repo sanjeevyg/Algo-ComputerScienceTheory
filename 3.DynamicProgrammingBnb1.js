@@ -25,7 +25,7 @@ function fib(n, memo = {}) {
 // console.log(fib(50))
 
 
-/* Say that you are a traveler on a 2D grid. You begin in the top-left corner and your goal is to travle to the bottom-right corner. You may only move down or right.
+/* Say that you are a traveler on a 2D grid. You begin in the top-left corner and your goal is to travel to the bottom-right corner. You may only move down or right.
 In how many ways can you travel to the goal on a grid with dimensions m * n? */
 
 
@@ -40,14 +40,23 @@ function travelGrid(m, n, memo = {}) {
     return memo[key]
 }
 
-/* console.log(travelGrid(0, 2))
-console.log(travelGrid(1, 2))
-console.log(travelGrid(2, 1))
-console.log(travelGrid(2, 2))
-console.log(travelGrid(2, 3))
-console.log(travelGrid(2, 4))
-console.log(travelGrid(3, 4))
-console.log(travelGrid(19, 19)) */
+// console.log(travelGrid(0, 2))
+// console.log(travelGrid(1, 2))
+// console.log(travelGrid(2, 1))
+// console.log(travelGrid(2, 2))
+// console.log(travelGrid(2, 3))
+// console.log(travelGrid(2, 4))
+// console.log(travelGrid(3, 4))
+// console.log(travelGrid(19, 19))
+
+
+/* Write a function `canSum(targetSum, numbers)` that takes in a targetsum and an array of numbers as arguments.indexOf
+
+The function should return a boolean indicatig whether or not it is possible to generate the targetSum using numbers from the array.
+You may use an element of the array as many times as needed.indexOf
+
+You may assume that all input numbers are nonnegative.
+ */
 
 function canSum(targetSum, numbers, memo={}){
     if(targetSum in memo) return memo[targetSum]
@@ -66,22 +75,18 @@ function canSum(targetSum, numbers, memo={}){
     return false;
 }
 
-const arr1 = [ 3, 4]
-const arr2 = [3, 6, 7, 8]
-const arr3 = [3, 6, 7]
+// const arr1 = [ 3, 4]
+// const arr2 = [3, 6, 7, 8]
+// const arr3 = [3, 6, 7]
 
 /* console.log(canSum(7, [2, 3]))
 console.log(canSum(100,arr2))
 console.log(canSum(1000, arr3)) */
 
-
-/* Write a function `canSum(targetSum, numbers)` that takes in a targetsum and an array of numbers as arguments.indexOf
-
-The function should return a boolean indicatig whether or not it is possible to generate the targetSum using numbers from the array.
-You may use an element of the array as many times as needed.indexOf
-
-You may assume that all input numbers are nonnegative.
- */
+/* Write a function `howSum(targetSum, numbers)` that takes in a targetSum and an array of numbers as arguments. 
+The function should return an array containing any combination of elements that add up to exactly the targeSum. 
+If there is no combination that adds up to the targetSum, then return null.
+If there are multiple combinations possible, you may return any single one. */
 
 
 const howSum = (targetSum, numbers, memo={}) => {
@@ -102,6 +107,17 @@ const howSum = (targetSum, numbers, memo={}) => {
     return null
 }
 
+
+// console.log(howSum(7, [3, 4, 2, 5]))
+// console.log(howSum(300, [2, 3, 5]))
+
+
+/* Write a function `bestSum(targetSum, numbers)` that takes in a targetSum and an array of numbers as arguments. 
+
+The function should return an array containing the shortest combintion of numbers tht add up to exactly the targetSum. 
+
+If there is a tie for the shortest combination, you may return any one of the shortest.
+ */
 
 
 const bestSum = (targetSum, numbers, memo={}) => {
@@ -154,12 +170,12 @@ const canConstruct = (targetString, wordBank, memo={}) => {
     return false
 }
 
-// let ar1 = ["ab", "abc", "cd", "def", "abcd"]
-// let ar2 = ["a", "p", "ent", "enter", "ot", "o", ]
+// let ar3 = ["ab", "abc", "cd", "def", "abcd"]
+// let ar4 = ["a", "p", "ent", "enter", "ot", "o", ]
 
 
-// console.log(canConstruct("abcdef", ar1)) 
-// console.log(canConstruct("enterapotentpot", ar2)) 
+// console.log(canConstruct("abcdef", ar3)) 
+// console.log(canConstruct("enterapotentpot", ar4)) 
 // console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
 
 
@@ -168,7 +184,7 @@ const canConstruct = (targetString, wordBank, memo={}) => {
 
 The function should return the number of ways that the `target` can be constructed by concatenating elements of the `wordBank` array.
 
-You myay resue elements of `wordBank` as many times as needed.
+You may resue elements of `wordBank` as many times as needed.
 */
 
 
@@ -381,6 +397,8 @@ const canConstructT = (target, wordBank) => {
 
 
 
+
+
 // console.log(canConstructT("abcdef", ar1)) 
 // console.log(canConstructT("enterapotentpot", ar2)) 
 // console.log(canConstructT("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
@@ -410,12 +428,12 @@ const countConstructT = (target, wordBank) => {
 
 
 
-// let ar1 = ["ab", "abc", "cd", "def", "abcd"]
-// let ar2 = ["a", "p", "ent", "enter", "ot", "o", ]
+let ar5 = ["ab", "abc", "cd", "def", "abcd"]
+let ar6 = ["a", "p", "ent", "enter", "ot", "o", ]
 
-// console.log(countConstructT("abcdef", ar1)) 
-// console.log(countConstructT("enterapotentpot", ar2)) 
-// console.log(countConstructT("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
+console.log(countConstructT("abcdef", ar5)) 
+console.log(countConstructT("enterapotentpot", ar6)) 
+console.log(countConstructT("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
 
 
 /* Write a function `allConstruct(target, wordBank)` that accepts a target string and an array of strings.
@@ -443,10 +461,10 @@ const allConstructT = (target, wordBank) => {
 }
 
 
-let ar1 = ["ab", "abc", "c", "cd", "def", "ef",  "abcd"]
-let ar2 = ["a", "p", "ent", "enter", "ot", "o", ]
+// let ar1 = ["ab", "abc", "c", "cd", "def", "ef",  "abcd"]
+// let ar2 = ["a", "p", "ent", "enter", "ot", "o", ]
 
-console.log(allConstructT("abcdef", ar1)) 
-console.log(allConstructT("enterapotentpot", ar2)) 
+// console.log(allConstructT("abcdef", ar1)) 
+// console.log(allConstructT("enterapotentpot", ar2)) 
 // console.log(allConstructT("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
-console.log(allConstructT("enterapotentpot", ar2)) 
+// console.log(allConstructT("enterapotentpot", ar2)) 
