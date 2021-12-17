@@ -21,8 +21,8 @@ function fib(n, memo = {}) {
 }
 
 
-// console.log(fib(7))
-// console.log(fib(50))
+console.log(fib(7))
+console.log(fib(50))
 
 
 /* Say that you are a traveler on a 2D grid. You begin in the top-left corner and your goal is to travel to the bottom-right corner. You may only move down or right.
@@ -170,13 +170,13 @@ const canConstruct = (targetString, wordBank, memo={}) => {
     return false
 }
 
-// let ar3 = ["ab", "abc", "cd", "def", "abcd"]
-// let ar4 = ["a", "p", "ent", "enter", "ot", "o", ]
+let ar3 = ["ab", "abc", "cd", "def", "abcd"]
+let ar4 = ["a", "p", "ent", "enter", "ot", "o", ]
 
 
-// console.log(canConstruct("abcdef", ar3)) 
-// console.log(canConstruct("enterapotentpot", ar4)) 
-// console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
+console.log(canConstruct("abcdef", ar3)) 
+console.log(canConstruct("enterapotentpot", ar4)) 
+console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
 
 
 
@@ -461,8 +461,8 @@ const allConstructT = (target, wordBank) => {
 }
 
 
-// let ar1 = ["ab", "abc", "c", "cd", "def", "ef",  "abcd"]
-// let ar2 = ["a", "p", "ent", "enter", "ot", "o", ]
+let ar1 = ["ab", "abc", "c", "cd", "def", "ef",  "abcd"]
+let ar2 = ["a", "p", "ent", "enter", "ot", "o", ]
 
 // console.log(allConstructT("abcdef", ar1)) 
 // console.log(allConstructT("enterapotentpot", ar2)) 
