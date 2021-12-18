@@ -1,3 +1,6 @@
+let array = require('./array.js') 
+// console.log(array)
+
 var tribonacci = function(n) {
     let table = Array(n + 1).fill(0)
     table[0] = 0
@@ -165,14 +168,9 @@ let calculateCost = (step, cost, memo={}) => {
 // console.log(minCostClimbingStairs([10, 15, 20]))
 // console.log(minCostClimbingStairs([1,100,1,1,1,100,1,1,100,1,5,9]))  
 
-121. Best Time to Buy and Sell Stock
-Easy
 
-12525
 
-454
-
-Add to List
+/* Best Time to Buy and Sell Stock
 
 Share
 You are given an array prices where prices[i] is the price of a given stock on the ith day.
@@ -199,4 +197,54 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 Constraints:
 
 1 <= prices.length <= 105
-0 <= prices[i] <= 104
+0 <= prices[i] <= 104 */
+
+// var maxProfit = function(prices) {
+//     return maxSale(element = 0, prices)
+// };
+
+// var maxSale = (element, prices) => {
+//     if(element >= prices.length) return 0
+//     let max = 0;
+//     let profit = 0;
+//     for(let i = 0; i < prices.length - 1; i++) {
+//         profit = prices[i + 1 + element] - prices[element]
+//         if(profit > max) max = profit
+//     }
+//     return Math.max(max, maxSale(element + 1, prices))
+// }
+
+
+// console.log(maxProfit([7,1,5,3,6,4]))
+// console.log(maxProfit([7,6,4,3,1]))
+// console.log(maxProfit( array))
+
+// var maxProfit = function(prices) {
+//     let table = Array(prices.length + 1).fill(0)
+//     table[0] = 0;
+//     for(let i = 0; i < prices.length; i++ ) {
+//         prices[i] > Math.max(...prices.slice(i + 1)) ?  table[i + 1] = 0 : table[i + 1] = Math.max(...prices.slice(i + 1)) - prices[i]   
+//         if(table[i + 1] < table[i]) table[i + 1] = table[i] 
+//     }
+
+//     return table[prices.length]
+// }
+
+
+var maxProfit = function(prices) {
+  let currentMax = 0;
+  let maxSofar = 0;
+  for(let i = 1; i < prices.length; i++) {
+      currentMax = Math.max(currentMax, currentMax + (prices[i] - prices[i - 1]))
+      maxSofar = Math.max(maxSofar, currentMax)
+  }
+  return maxSofar
+}
+
+
+
+
+console.log(maxProfit([7,1,5,3,6,4]))
+console.log(maxProfit(array))
+// console.log(maxProfit( array))
+
