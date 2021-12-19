@@ -235,7 +235,7 @@ var maxProfit = function(prices) {
   let currentMax = 0;
   let maxSofar = 0;
   for(let i = 1; i < prices.length; i++) {
-      currentMax = Math.max(currentMax, currentMax + (prices[i] - prices[i - 1]))
+      currentMax = Math.max(0, currentMax + prices[i] - prices[i - 1])
       maxSofar = Math.max(maxSofar, currentMax)
   }
   return maxSofar
@@ -244,7 +244,122 @@ var maxProfit = function(prices) {
 
 
 
-console.log(maxProfit([7,1,5,3,6,4]))
-console.log(maxProfit(array))
+// console.log(maxProfit([7,1,5,3,6,4]))
+// console.log(maxProfit(array)) 
 // console.log(maxProfit( array))
 
+
+/* Maximum Subarray
+Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
+
+A subarray is a contiguous part of an array.
+
+ 
+
+Example 1:
+
+Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
+Output: 6
+Explanation: [4,-1,2,1] has the largest sum = 6.
+Example 2:
+
+Input: nums = [1]
+Output: 1
+Example 3:
+
+Input: nums = [5,4,-1,7,8]
+Output: 23
+ 
+
+Constraints:
+
+1 <= nums.length <= 105
+-104 <= nums[i] <= 104
+ */
+
+var maxSubArray = function(nums) {
+    // if(nums.length === 1) return nums[0];
+    let currentMax = nums[0];
+    let maxSofar = nums[0];
+    for(let i = 1; i < nums.length; i++) {
+        currentMax = Math.max(currentMax + nums[i], nums[i])
+        maxSofar = Math.max(maxSofar, currentMax)
+    }
+    return maxSofar
+};
+
+/* console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])) //6
+console.log(maxSubArray([5,4,-1,7,8])) //23
+console.log(maxSubArray([1])) //1
+console.log(maxSubArray([-2,-1])) //-1
+console.log(maxSubArray([-1,-2])) // -1
+console.log(maxSubArray([5,4,-1,7,8])) //23 */
+
+
+
+
+var maxSubArray = function(nums) {
+    if(nums.length === 1) return nums[0];
+    let maxSum = Math.max(nums[nums.length -1], maxSubArray(nums.slice(0, nums.length - 1)) + nums[nums.length -1], nums[nums.length -2] )
+    return maxSum
+};
+
+/* console.log(maxSubArray([-2,1,-3,4,-1,2,1,-5,4])) //6
+console.log(maxSubArray([5,4,-1,7,8])) //23
+console.log(maxSubArray([1])) //1
+console.log(maxSubArray([-2,-1])) //-1
+console.log(maxSubArray([-1,-2])) // -1
+console.log(maxSubArray([5,4,-1,7,8])) //23 */
+
+
+
+/* All Possible Full Binary Trees
+
+Given an integer n, return a list of all possible full binary trees with n nodes. Each node of each tree in the answer must have Node.val == 0.
+
+Each element of the answer is the root node of one possible tree. You may return the final list of trees in any order.
+
+A full binary tree is a binary tree where each node has exactly 0 or 2 children.
+
+Input: n = 7
+Output: [[0,0,0,null,null,0,0,null,null,0,0],[0,0,0,null,null,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,null,null,null,null,0,0],[0,0,0,0,0,null,null,0,0]]
+Example 2:
+
+Input: n = 3
+Output: [[0,0,0]]
+ 
+
+Constraints:
+
+1 <= n <= 20 */
+
+
+
+
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}
+
+var allPossibleFBT = function(n) {
+    let node = new TreeNode()
+    if (n % 2) return null;
+    if(n === 1) return [[0]]
+    return [[0, 0, allPossibleFBT(n - 2), 
+    
+};
+
+    // let leftNode = node.left
+    // let rightNode = node.right
+    // if(leftNode.val === 0) {
+    //     rightNode = allPossibleFBT(n - 2)
+    // } else if(rightNode.val === 0) {
+    //     leftNode = allPossibleFBT(n - 2)
+    // }
+  
+    // return node
+    
+
+// console.log(allPossibleFBT(7))
+console.log(allPossibleFBT(3))

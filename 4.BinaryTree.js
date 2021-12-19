@@ -14,7 +14,7 @@ const depthFirstValues = (root) => {
     const stack = [ root ]; 
     while(stack.length > 0) {
         const current = stack.pop()
-        console.log(current.val);
+        // console.log(current.val);
         result.push(current.val)
 
         if (current.right) stack.push(current.right); 
@@ -43,7 +43,7 @@ b.left = d;
 b.right = e;
 c.right = f;
 
-//  console.log(depthFirstValues(a))
+ console.log(depthFirstValues(a))
 
 
  const depthFirstValues2nd = (root) => {
@@ -163,7 +163,7 @@ c.right = f;
     const maxPathSum = (root) => {
         if(root === null) return -Infinity;
         if(root.left === null && root.right === null) return root.val
-        const largest = Math.max(maxPathSum(root.right), maxPathSum(root.right))
+        const largest = Math.max(maxPathSum(root.left), maxPathSum(root.right))
         return root.val + largest
     }
-    console.log(maxPathSum(a))
+    console.log(maxPathSum(a)) 
