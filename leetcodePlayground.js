@@ -343,12 +343,34 @@ function TreeNode(val, left, right) {
 }
 
 var allPossibleFBT = function(n) {
+    if(n % 2 === 0) return [];
+    let root = new TreeNode()
     let node = new TreeNode()
-    if (n % 2) return null;
-    if(n === 1) return [[0]]
-    return [[0, 0, allPossibleFBT(n - 2), 
+    if(n === 1) return [root.val]
+
+    let random = Math.floor(Math.random()*2)
+    let nodeValue = [null, allPossibleFBT(n - 2)]
+
+    let fbT = []
+    if(root !== null) {
+            if(n === 3) {
+                root.left = node
+                root.right = node
+                fbT.push([root.val, root.left.val, root.right.val])
+            } 
+            if(n > 3) {
+                root.left = nodeValue.random
+                if(root.left === null) {
+                    root.right === null
+                    fbT.push([root.val, null, null])
+                }
+                root.right = allPossibleFBT(n - 2)
+                fbT
+            }
     
-};
+        }
+    return fbT
+ }
 
     // let leftNode = node.left
     // let rightNode = node.right
@@ -362,4 +384,8 @@ var allPossibleFBT = function(n) {
     
 
 // console.log(allPossibleFBT(7))
-console.log(allPossibleFBT(3))
+console.log(allPossibleFBT(5))
+
+
+// const randomElement = array[Math.floor(Math.random() * array.length)];
+
