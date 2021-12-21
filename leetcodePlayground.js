@@ -344,32 +344,22 @@ function TreeNode(val, left, right) {
 
 var allPossibleFBT = function(n) {
     if(n % 2 === 0) return [];
-    let root = new TreeNode()
-    let node = new TreeNode()
-    if(n === 1) return [root.val]
-
-    let random = Math.floor(Math.random()*2)
-    let nodeValue = [null, allPossibleFBT(n - 2)]
-
-    let fbT = []
-    if(root !== null) {
-            if(n === 3) {
-                root.left = node
-                root.right = node
-                fbT.push([root.val, root.left.val, root.right.val])
-            } 
-            if(n > 3) {
-                root.left = nodeValue.random
-                if(root.left === null) {
-                    root.right === null
-                    fbT.push([root.val, null, null])
-                }
-                root.right = allPossibleFBT(n - 2)
-                fbT
-            }
-    
-        }
-    return fbT
+   
+    if(n === 1) return [new TreeNode(0)]
+    let tree = [];
+    for(let i = 1; i <= n - 2; i += 2 ) {
+        let leftTree = allPossibleFBT(i)
+        let rightTree = allPossibleFBT(n - 1 - i) 
+        leftTree.forEach(lt => {
+            rightTree.forEach(rt => {
+                let root = new TreeNode(0)
+                root.left = lt
+                root.right = rt
+                tree.push(root)
+            })
+        })
+    }
+    return tree
  }
 
     // let leftNode = node.left
@@ -384,8 +374,138 @@ var allPossibleFBT = function(n) {
     
 
 // console.log(allPossibleFBT(7))
-console.log(allPossibleFBT(5))
+// console.log(allPossibleFBT(5))
 
 
 // const randomElement = array[Math.floor(Math.random() * array.length)];
 
+
+/* Count Square Submatrices with All Ones
+
+Given a m * n matrix of ones and zeros, return how many square submatrices have all ones.
+
+ 
+
+Example 1:
+
+Input: matrix =
+[
+  [0,1,1,1],
+  [1,1,1,1],
+  [0,1,1,1]
+]
+Output: 15
+Explanation: 
+There are 10 squares of side 1.
+There are 4 squares of side 2.
+There is  1 square of side 3.
+Total number of squares = 10 + 4 + 1 = 15.
+Example 2:
+
+Input: matrix = 
+[
+  [1,0,1],
+  [1,1,0],
+  [1,1,0]
+]
+Output: 7
+Explanation: 
+There are 6 squares of side 1.  
+There is 1 square of side 2. 
+Total number of squares = 6 + 1 = 7.
+ 
+
+Constraints:
+
+1 <= arr.length <= 300
+1 <= arr[0].length <= 300
+0 <= arr[i][j] <= 1 */
+
+
+var countSquares = function(matrix) {
+    let m = matrix.length 
+    let n = matrix[0].length
+    if (m < 1) return 0
+    let count = 0
+
+    for(let i = 0; i < m; i++) { 
+        for(let j=0; j < n; j++) {
+            if(matrix[i][j] === 1 && i > 0 && j > 0)  {
+                matrix[i][j] = matrix[i][j] + Math.min(matrix[i - 1][j], matrix[i][j - 1], matrix[i - 1][j - 1])
+            }
+            count += matrix[i][j]
+        }
+    }
+    return count
+};
+
+
+
+
+// console.log(countSquares([
+//     [0,1,1,1],
+//     [1,1,1,1],
+//     [0,1,1,1]
+// ]))
+
+
+// console.log(countSquares([
+//     [1, 1]
+// ]))
+
+// console.log(countSquares([
+//   [1,0,1],
+//   [1,1,0],
+//   [1,1,0]
+// ]))
+
+
+/* 
+House Robbr 
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+Example 1:
+
+Input: nums = [1,2,3,1]
+Output: 4
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+Total amount you can rob = 1 + 3 = 4.
+Example 2:
+
+Input: nums = [2,7,9,3,1]
+Output: 12
+Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+Total amount you can rob = 2 + 9 + 1 = 12.
+ 
+
+Constraints:
+
+1 <= nums.length <= 100
+0 <= nums[i] <= 400
+
+
+*/
+
+var rob = function(nums) {
+
+    let table = Array(nums.length).fill(0)
+    table[0] = nums[0]
+    table[1] = nums[1]
+    for(let i = 0; i <= nums.length; i++) {
+        if(i + 2 <= nums.length - 1) {
+        table[i + 2] += Math.max(table[i] + nums[i + 2], table[i + 2])
+       
+        console.log(table[i + 2])
+        }
+        
+    
+        // if(i + 3 <= nums.length - 1) {
+        // table[i + 3] += Math.max(table[i] + nums[i + 3], table[i + 3])
+        // }
+    }
+    return table
+};
+
+console.log(rob([2,7,9,3,1]))
+console.log(rob([1,3,1,3,100]))
