@@ -492,13 +492,16 @@ var rob = function(nums) {
     let table = Array(nums.length).fill(0)
     table[0] = nums[0]
     table[1] = nums[1]
-    for(let i = 0; i <= nums.length; i++) {
-        if(i + 2 <= nums.length - 1) {
-        table[i + 2] += Math.max(table[i] + nums[i + 2], table[i + 2])
-       
-        console.log(table[i + 2])
+    for(let i = 0; i <= table.length; i++) {
+        if(i < 2) {
+        nums[i] = nums[i]
         }
-        
+        // if( i >= 2 ) {
+            nums[i] += Math.max(nums[i] + nums[i - 2], nums[i] + nums[i - 3])
+        // }
+        console.log(nums[i])
+       
+     
     
         // if(i + 3 <= nums.length - 1) {
         // table[i + 3] += Math.max(table[i] + nums[i + 3], table[i + 3])
@@ -508,4 +511,5 @@ var rob = function(nums) {
 };
 
 console.log(rob([2,7,9,3,1]))
-console.log(rob([1,3,1,3,100]))
+// console.log(rob([1,3,1,3,100]))
+// console.log(rob([2, 1, 1, 2]))
