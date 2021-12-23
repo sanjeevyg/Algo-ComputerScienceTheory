@@ -1,3 +1,4 @@
+const { slice } = require('./array.js');
 let array = require('./array.js') 
 // console.log(array)
 
@@ -488,28 +489,196 @@ Constraints:
 */
 
 var rob = function(nums) {
-
-    let table = Array(nums.length).fill(0)
-    table[0] = nums[0]
-    table[1] = nums[1]
-    for(let i = 0; i <= table.length; i++) {
+    let length = nums.length
+    if( nums === [0]) return 0
+    for(let i = 0; i <= length; i++) {
         if(i < 2) {
-        nums[i] = nums[i]
+            nums[i] = nums[i]
         }
-        // if( i >= 2 ) {
-            nums[i] += Math.max(nums[i] + nums[i - 2], nums[i] + nums[i - 3])
-        // }
-        console.log(nums[i])
-       
-     
-    
-        // if(i + 3 <= nums.length - 1) {
-        // table[i + 3] += Math.max(table[i] + nums[i + 3], table[i + 3])
-        // }
-    }
-    return table
+        if( i === 2 ) {
+            nums[i] = nums[i] + nums[i - 2]
+        }
+        if( i > 2 ) {
+            nums[i] = Math.max(nums[i] + nums[i - 2], nums[i] + nums[i - 3])
+        }
+        }
+    return Math.max(...nums.slice(0, -1))
 };
 
-console.log(rob([2,7,9,3,1]))
+// var rob = function(nums) {
+//     return nums.reduce((p, n) => { 
+//         return [p[1], Math.max(p[0] + n, p[1])]; 
+//     }, [0,0])[1]
+// };
+
+
+
+
+// console.log(rob([2,7,9,3,1]))
 // console.log(rob([1,3,1,3,100]))
 // console.log(rob([2, 1, 1, 2]))
+// console.log(rob([0]))
+
+/* Given an n x n array of integers matrix, return the minimum sum of any falling path through matrix.
+
+A falling path starts at any element in the first row and chooses the element in the next row that is either directly below or diagonally left/right. 
+Specifically, the next element from position (row, col) will be (row + 1, col - 1), (row + 1, col), or (row + 1, col + 1).
+
+Input: matrix = [[2,1,3],[6,5,4],[7,8,9]]
+Output: 13
+Explanation: There are two falling paths with a minimum sum as shown. 
+
+
+Input: matrix = [[-19,57],[-40,-5]]
+Output: -59
+Explanation: The falling path with a minimum sum is shown.
+ 
+
+Constraints:
+
+n == matrix.length == matrix[i].length
+1 <= n <= 100
+-100 <= matrix[i][j] <= 100
+*/
+
+
+var minFallingPathSum = function(matrix) {
+    let m = matrix.length 
+    let n = matrix[0].length 
+    if(m === 1 && n === 1) return matrix[0][0]
+    if(m === 1) return Math.min(...Matrix[0])
+    for(let i = 0; i < m; i++) {
+        for(let j = 0; j < n; j++) {
+            if(i > 0 && j === 0) {
+                matrix[i][j] = Math.min(matrix[i][j] + matrix[i - 1][j], matrix[i][j] + matrix[i - 1][j + 1])
+            }
+            if(i > 0 && j > 0 && j < n - 1) {
+                matrix[i][j] = Math.min(matrix[i][j] + matrix[i - 1][j - 1], matrix[i][j] + matrix[i - 1][j], matrix[i][j] + matrix[i - 1][j + 1])
+            }
+            if(i > 0 && j >= n - 1) {
+                matrix[i][j] = Math.min(matrix[i][j] + matrix[i - 1][j - 1], matrix[i][j] + matrix[i - 1][j])
+            }
+        }
+    }
+    return Math.min(...matrix[matrix.length - 1])
+};
+
+
+// console.log(minFallingPathSum([[2,1,3],[6,5,4],[7,8,9]]))
+// console.log(minFallingPathSum([[2]]))
+
+
+/* Palindromic Substrings
+
+Given a string s, return the number of palindromic substrings in it.
+
+A string is a palindrome when it reads the same backward as forward.
+
+A substring is a contiguous sequence of characters within the string.
+
+ 
+
+Example 1:
+
+Input: s = "abc"
+Output: 3
+Explanation: Three palindromic strings: "a", "b", "c".
+Example 2:
+
+Input: s = "aaa"
+Output: 6
+Explanation: Six palindromic strings: "a", "a", "a", "aa", "aa", "aaa".
+ 
+
+Constraints:
+
+1 <= s.length <= 1000
+s consists of lowercase English letters. */
+
+// var countSubstrings = function(s) {
+//     let length = s.length 
+
+//     count = length
+    
+//     while (s.length > 1) {  
+//         for(let i = 1; i < s.length; i++) {
+//             const str1 = (s.substring(0, i + 1)).split('').reverse().join('')
+//             if( s.substring(0, i + 1) === str1 ) {
+//                 count += 1
+//             }
+//         }
+//             s = s.substring(1)
+//     }   
+//     return count
+// };
+
+var countSubstrings = function(s) {
+    let count = 0;
+    
+    const helper = (left, right) => {
+        while(left >= 0 && right < s.length && s[left] === s[right]) {
+            left-- 
+            right++ 
+            count++
+        }
+    }
+
+    for(let i = 0; i < s.length; i++) {
+        helper(i, i)
+        helper(i, i + 1)
+    }
+    return count
+}
+
+
+
+// console.log(countSubstrings("aaa"))
+// console.log(countSubstrings("aaaaa")) //15
+// console.log(countSubstrings("abc"))
+
+/* Given an integer x, return true if x is palindrome integer.
+
+An integer is a palindrome when it reads the same backward as forward.
+
+For example, 121 is a palindrome while 123 is not.
+ 
+
+Example 1:
+
+Input: x = 121
+Output: true
+Explanation: 121 reads as 121 from left to right and from right to left.
+Example 2:
+
+Input: x = -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+Example 3:
+
+Input: x = 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+ 
+
+Constraints:
+
+-231 <= x <= 231 - 1
+ 
+
+Follow up: Could you solve it without converting the integer to a string? */
+
+var isPalindrome = function(x) {
+    let str = String(x).split('').reverse().join('')
+    let input = String(x)
+    if(input === str) {
+        return true
+    }
+    return false
+};
+
+
+console.log(isPalindrome(-121))
+// console.log(isPalindrome(121))
+
+
+// Do it again without using converting to string
