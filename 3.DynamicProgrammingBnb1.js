@@ -21,8 +21,8 @@ function fib(n, memo = {}) {
 }
 
 
-console.log(fib(7))
-console.log(fib(50))
+// console.log(fib(7))
+// console.log(fib(50))
 
 
 /* Say that you are a traveler on a 2D grid. You begin in the top-left corner and your goal is to travel to the bottom-right corner. You may only move down or right.
@@ -52,7 +52,7 @@ function travelGrid(m, n, memo = {}) {
 
 /* Write a function `canSum(targetSum, numbers)` that takes in a targetsum and an array of numbers as arguments.indexOf
 
-The function should return a boolean indicatig whether or not it is possible to generate the targetSum using numbers from the array.
+The function should return a boolean indicating whether or not it is possible to generate the targetSum using numbers from the array.
 You may use an element of the array as many times as needed.indexOf
 
 You may assume that all input numbers are nonnegative.
@@ -108,7 +108,7 @@ const howSum = (targetSum, numbers, memo={}) => {
 }
 
 
-// console.log(howSum(7, [3, 4, 2, 5]))
+console.log(howSum(7, [3, 4, 2, 5]))
 // console.log(howSum(300, [2, 3, 5]))
 
 
@@ -174,9 +174,9 @@ let ar3 = ["ab", "abc", "cd", "def", "abcd"]
 let ar4 = ["a", "p", "ent", "enter", "ot", "o", ]
 
 
-console.log(canConstruct("abcdef", ar3)) 
-console.log(canConstruct("enterapotentpot", ar4)) 
-console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
+// console.log(canConstruct("abcdef", ar3)) 
+// console.log(canConstruct("enterapotentpot", ar4)) 
+// console.log(canConstruct("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
 
 
 
@@ -431,9 +431,9 @@ const countConstructT = (target, wordBank) => {
 let ar5 = ["ab", "abc", "cd", "def", "abcd"]
 let ar6 = ["a", "p", "ent", "enter", "ot", "o", ]
 
-console.log(countConstructT("abcdef", ar5)) 
-console.log(countConstructT("enterapotentpot", ar6)) 
-console.log(countConstructT("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
+// console.log(countConstructT("abcdef", ar5)) 
+// console.log(countConstructT("enterapotentpot", ar6)) 
+// console.log(countConstructT("eeeeeeeeeeeeeeeeeeeeeeeez", ["e", "ee", "eee", "eeee", "eeeeee"])) 
 
 
 /* Write a function `allConstruct(target, wordBank)` that accepts a target string and an array of strings.
