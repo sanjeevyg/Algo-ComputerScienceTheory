@@ -2,7 +2,7 @@
 
 // Note: This challenge introduces precision problems. The test cases are scaled to six decimal places, though answers with absolute error of up to 10 to the power -4 are acceptable.
 
-let array = [-4, 3, -9, 0, 4, 1]
+// let array = [-4, 3, -9, 0, 4, 1]
 
 function plusMinus(arr) {
     let s = arr.length;
@@ -22,7 +22,7 @@ function plusMinus(arr) {
 
 // plusMinus(array)
 
-let arr = [1, 2, 3, 4, 5]
+// let arr = [1, 2, 3, 4, 5]
 
 function miniMaxSum(arr) {
     let sum = arr.reduce((sum, element) => sum + element)
@@ -61,20 +61,113 @@ function timeConversion(s) {
 
 // console.log(timeConversion(str))
 
-let a = [0, 0, 1, 2, 1]
-// let a = [0, 0]
-function lonelyinteger(a) {
-    let arr = a;
-    let count = 0;
+// let a = [0, 0, 1, 2, 1]
 
-    let array = []
-    for(let e of a) {
-        if(arr.includes(e)) {
-            array.push(arr.indexOf(e))
+function lonelyinteger(a) {
+    let count = 0;
+    for(let i = 0; i < a.length; i++) {
+        for(let j = 0; j < a.length; j++) {
+            if(a[i] === a[j]) count++
         }
-        arr.splice(arr.indexOf(e), arr.indexOf(e) + 1)
+        if(count < 2) return a[i]
+        count = 0
     }
-    return array
 }
 
-console.log(lonelyinteger(a))
+// console.log(lonelyinteger(a))
+
+// let arr = [[1, 2, 3], [4, 5, 6], [9, 8, 9]]
+
+function diagonalDifference(arr) {
+    let dSumFirst = 0;
+    let dSumSecond = 0;
+
+    for(let i=0; i < arr.length; i++) {
+        dSumFirst += arr[i][i]
+        dSumSecond += arr[i][[arr.length - 1] - i]
+    }
+
+    let result = dSumFirst - dSumSecond
+    if (result < 0) result = (-1)*result
+
+    return result
+}
+// console.log(diagonalDifference(arr))
+
+// let array = [1, 1, 3, 2, 1]
+
+function countingSort(arr) {
+    let indexArray = new Array(100).fill(0)
+
+    for(let element of arr) {
+       indexArray[element]++ 
+    }
+    return indexArray
+}
+
+// console.log(countingSort(array))
+
+
+class Node {
+    constructor(val) {
+        this.val = val;
+        this.next = null;
+    }
+}
+
+
+let a = new Node('A');
+let b = new Node('B');
+let c = new Node('C');
+let d = new Node('D');
+let e = new Node('E');
+
+a.next = b;
+b.next = c;
+c.next = d;
+d.next = e;
+
+
+const printNodes = (head) => {
+    let current = head
+    while(current != null) {
+        console.log(current.val)
+        current = current.next
+    }
+}
+
+const printNodesRecurrsive = (head) => {
+    if(head === null) return;
+    console.log(head.val);
+    printNodes(head.next)
+}
+
+// printNodes(a)
+// printNodesRecurrsive(a)
+
+
+/* const printValues = (head) => {
+    let values = [];
+    let current = head;
+    while(current != null) {
+        values.push(current.val)
+        current = current.next
+    }
+    return values
+}
+ */
+
+const printValuesRecurssive = (head) => {
+    let values = [];
+    let current = head;
+    helperMethod(current, values)
+    return values
+}
+
+const helperMethod = (current, values) => {
+    if(current === null) return;
+    values.push(current.val)
+    helperMethod(current.next, values)
+}
+
+console.log(printValuesRecurssive(a))
