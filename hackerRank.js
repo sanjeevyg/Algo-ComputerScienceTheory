@@ -106,8 +106,6 @@ function countingSort(arr) {
 }
 
 // console.log(countingSort(array))
-
-
 class Node {
     constructor(val) {
         this.val = val;
@@ -116,11 +114,11 @@ class Node {
 }
 
 
-let a = new Node('A');
-let b = new Node('B');
-let c = new Node('C');
-let d = new Node('D');
-let e = new Node('E');
+let a = new Node(1);
+let b = new Node(2);
+let c = new Node(5);
+let d = new Node(7);
+let e = new Node(9);
 
 a.next = b;
 b.next = c;
@@ -146,7 +144,7 @@ const printNodesRecurrsive = (head) => {
 // printNodesRecurrsive(a)
 
 
-/* const printValues = (head) => {
+const printValues = (head) => {
     let values = [];
     let current = head;
     while(current != null) {
@@ -155,7 +153,7 @@ const printNodesRecurrsive = (head) => {
     }
     return values
 }
- */
+
 
 const printValuesRecurssive = (head) => {
     let values = [];
@@ -170,4 +168,67 @@ const helperMethod = (current, values) => {
     helperMethod(current.next, values)
 }
 
-console.log(printValuesRecurssive(a))
+// console.log(printValues(a))
+// console.log(printValuesRecurssive(a))
+
+const sum = (head) => {
+    let sum = 0;
+    let current = head;
+    while(current != null) {
+        sum += current.val
+        current = current.next
+    }
+    return sum
+}
+
+const sumRecurrsive = (head) => {
+    if(head === null) return 0;
+    return head.val + sumRecurrsive(head.next)
+}
+
+// console.log(sum(a))
+// console.log(sumRecurrsive(a))
+
+
+
+
+const findTarget = (head, target) => {
+    let current = head;
+    while(current != null) {
+        if(current.val === target) return true
+        current = current.next
+    }
+    return false
+}
+
+const findTargetRecurrsive = (head, target) => {
+    if(head === null) return false 
+    if(head.val === target) return true 
+    return findTargetRecurrsive(head.next, target)
+}
+
+
+
+// console.log(findTarget(a, 7))
+// console.log(findTargetRecurrsive(a, 15))
+
+const findValueAtIndex = (head, index) => {
+    let current = head;
+    let count = 0;
+    while(current != null) {
+        if(count === index) return current.val
+        current = current.next
+        count++
+    }
+    return null
+}
+
+const findValueAtIndexRecurrsive = (head, index) => {
+    if(head === null) return null
+    if(index === 0) return head.val 
+    index = index - 1
+    return findValueAtIndex(head.next, index)
+}
+
+console.log(findValueAtIndex(a, 2))
+console.log(findValueAtIndexRecurrsive(a, 2))
