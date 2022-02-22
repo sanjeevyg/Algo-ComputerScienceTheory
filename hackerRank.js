@@ -20,7 +20,7 @@ function plusMinus(arr) {
 }
  
 
-plusMinus(array)
+// plusMinus(array)
 
 let arr = [1, 2, 3, 4, 5]
 
@@ -33,5 +33,48 @@ function miniMaxSum(arr) {
 }
 
 
-miniMaxSum(arr)
+// miniMaxSum(arr)
 
+let str = "12:45:54PM"
+
+function timeConversion(s) {
+    let arr = s.split("");
+    
+    // let militaryTime;
+    let hour = parseInt(s.substring(0, 2));
+        
+    if(arr.includes("P")) {
+        if (hour > 12 || hour == 12) return arr.splice(0, arr.length - 2).join("")
+        let militaryHour = String(hour + 12)
+        let militaryTime = `${militaryHour}${arr.splice(2, arr.length - 4).join("")}`
+        return militaryTime
+    }
+
+
+
+    let militaryHour  = s.substring(0, 2)
+    if (hour > 12 || hour == 12) {militaryHour = "0" + String(hour - 12)}
+    let militaryTime = `${militaryHour}${arr.splice(2, arr.length - 4).join("")}`
+
+    return militaryTime
+}
+
+// console.log(timeConversion(str))
+
+let a = [0, 0, 1, 2, 1]
+// let a = [0, 0]
+function lonelyinteger(a) {
+    let arr = a;
+    let count = 0;
+
+    let array = []
+    for(let e of a) {
+        if(arr.includes(e)) {
+            array.push(arr.indexOf(e))
+        }
+        arr.splice(arr.indexOf(e), arr.indexOf(e) + 1)
+    }
+    return array
+}
+
+console.log(lonelyinteger(a))
