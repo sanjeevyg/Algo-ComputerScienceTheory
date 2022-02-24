@@ -190,8 +190,6 @@ const sumRecurrsive = (head) => {
 // console.log(sumRecurrsive(a))
 
 
-
-
 const findTarget = (head, target) => {
     let current = head;
     while(current != null) {
@@ -230,5 +228,44 @@ const findValueAtIndexRecurrsive = (head, index) => {
     return findValueAtIndex(head.next, index)
 }
 
-console.log(findValueAtIndex(a, 2))
-console.log(findValueAtIndexRecurrsive(a, 2))
+// console.log(findValueAtIndex(a, 2))
+// console.log(findValueAtIndexRecurrsive(a, 2))
+
+const reverseTheLinkedList = (head) => {
+    let current = head;
+    let prev = null;
+    while(current != null) {
+        const next = current.next;
+        current.next = prev;
+        prev = current;
+        current = next;
+    }
+    return prev;
+}
+
+const reverseTheLinkedListRecurssive = (head, prev = null) => {
+    if(head === null) return prev;
+    const next = head.next;
+    head.next = prev;
+    return reverseTheLinkedListRecurssive(next, head)
+}
+
+//    N <- A  <- B  <-  C  <-  D     N
+//                             P     C    
+// console.log(reverseTheLinkedList(a))
+console.log(reverseTheLinkedListRecurssive(a))
+
+
+const printNodes = (head) => {
+    let current = head
+    while(current != null) {
+        console.log(current.val)
+        current = current.next
+    }
+}
+
+const printNodesRecurrsive = (head) => {
+    if(head === null) return;
+    console.log(head.val);
+    printNodes(head.next)
+}
