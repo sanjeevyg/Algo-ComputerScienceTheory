@@ -269,3 +269,20 @@ const printNodesRecurrsive = (head) => {
     console.log(head.val);
     printNodes(head.next)
 }
+
+
+function plusMinus(arr) {
+    let s = arr.length;
+    let positive = 0;
+    let negative = 0;
+    let zero = 0;
+    for(let element of arr) {
+        if (element > 0) positive++ 
+        if (element < 0) negative++ 
+        if (element == 0) zero++ 
+    }
+    console.log(positive/s)
+    console.log(negative/s)
+    console.log(zero/s)
+}
+ 
