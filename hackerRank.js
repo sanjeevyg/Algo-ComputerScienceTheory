@@ -286,3 +286,20 @@ function plusMinus(arr) {
     console.log(zero/s)
 }
  
+
+
+const minVR = (root) => {
+    if(root === null) return Infinity;
+    return Math.min(root.val, minVR(root.left), minVR(root.right))
+}
+
+// console.log("line 160", minVR(a))
+
+
+const maxPathSum = (root) => {
+    if(root === null) return -Infinity;
+    if(root.left === null && root.right === null) return root.val
+    const largest = Math.max(maxPathSum(root.left), maxPathSum(root.right))
+    return root.val + largest
+}
+console.log(maxPathSum(a)) 

@@ -335,8 +335,6 @@ Constraints:
 1 <= n <= 20 */
 
 
-
-
 function TreeNode(val, left, right) {
     this.val = (val===undefined ? 0 : val)
     this.left = (left===undefined ? null : left)
@@ -386,7 +384,6 @@ var allPossibleFBT = function(n) {
 Given a m * n matrix of ones and zeros, return how many square submatrices have all ones.
 
  
-
 Example 1:
 
 Input: matrix =
@@ -510,9 +507,6 @@ var rob = function(nums) {
 //         return [p[1], Math.max(p[0] + n, p[1])]; 
 //     }, [0,0])[1]
 // };
-
-
-
 
 // console.log(rob([2,7,9,3,1]))
 // console.log(rob([1,3,1,3,100]))
@@ -680,10 +674,7 @@ var isPalindrome = function(x) {
 console.log(isPalindrome(-121))
 // console.log(isPalindrome(121))
 
-
 // Do it again without using converting to string
-
-
 
 // depth first-values;
 class Node {
