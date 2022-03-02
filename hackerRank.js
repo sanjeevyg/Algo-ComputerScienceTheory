@@ -126,19 +126,19 @@ c.next = d;
 d.next = e;
 
 
-const printNodes = (head) => {
-    let current = head
-    while(current != null) {
-        console.log(current.val)
-        current = current.next
-    }
-}
+// const printNodes = (head) => {
+//     let current = head
+//     while(current != null) {
+//         console.log(current.val)
+//         current = current.next
+//     }
+// }
 
-const printNodesRecurrsive = (head) => {
-    if(head === null) return;
-    console.log(head.val);
-    printNodes(head.next)
-}
+// const printNodesRecurrsive = (head) => {
+//     if(head === null) return;
+//     console.log(head.val);
+//     printNodes(head.next)
+// }
 
 // printNodes(a)
 // printNodesRecurrsive(a)
@@ -253,7 +253,7 @@ const reverseTheLinkedListRecurssive = (head, prev = null) => {
 //    N <- A  <- B  <-  C  <-  D     N
 //                             P     C    
 // console.log(reverseTheLinkedList(a))
-console.log(reverseTheLinkedListRecurssive(a))
+// console.log(reverseTheLinkedListRecurssive(a))
 
 
 const printNodes = (head) => {
@@ -302,4 +302,52 @@ const maxPathSum = (root) => {
     const largest = Math.max(maxPathSum(root.left), maxPathSum(root.right))
     return root.val + largest
 }
-console.log(maxPathSum(a)) 
+// console.log(maxPathSum(a)) 
+
+nums = [2,7,11,15], target = 9
+
+// const twoSum = (nums, target) => {
+//     for(let i = 0; i < nums.length; i++) {
+//         for(let j = 1; j < nums.length; j++) 
+//             if(nums[i] + nums[j] === target) {
+//                 return [nums[i], nums[j]]
+//         }
+//     }
+// }
+
+//Second Method
+
+const twoSum = (nums, target) => {
+    let array = [];
+    let object = {}
+    for( let i=0; i < nums.length; i++) {
+        object[i] = target - nums[i]
+    }
+    for(let i = 0; i < nums.length; i++) {
+        if(object[i] === nums[i]) {
+            array.push(nums[i])
+        }      
+    }
+    return object
+}
+
+console.log(twoSum(nums, target))
+
+
+
+var rotate = function(nums, k) {
+    if (k >= nums.length ) {
+        k = k % nums.length
+    }
+
+    if ( k === 0 ) {
+        return nums
+    }
+    
+    nums.unshift(...nums.slice(-k))
+    nums.splice(-k)
+
+    return nums
+}
+
+
