@@ -317,37 +317,23 @@ nums = [2,7,11,15], target = 9
 
 //Second Method
 
+
+// Find the difference between target and array and use object to store it
+// 
 const twoSum = (nums, target) => {
-    let array = [];
-    let object = {}
-    for( let i=0; i < nums.length; i++) {
-        object[i] = target - nums[i]
+    let obj = {}
+    obj[target - nums[0]] = 0
+    for(let i = 1; i < nums.length; i++) {
+        if(nums[i] in obj) {
+            return [obj[nums[i]], i]
+        }
+        obj[target - nums[i]] = i;
     }
-    for(let i = 0; i < nums.length; i++) {
-        if(object[i] === nums[i]) {
-            array.push(nums[i])
-        }      
-    }
-    return object
 }
 
 console.log(twoSum(nums, target))
 
 
 
-var rotate = function(nums, k) {
-    if (k >= nums.length ) {
-        k = k % nums.length
-    }
-
-    if ( k === 0 ) {
-        return nums
-    }
-    
-    nums.unshift(...nums.slice(-k))
-    nums.splice(-k)
-
-    return nums
-}
 
 
