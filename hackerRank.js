@@ -334,6 +334,17 @@ const twoSum = (nums, target) => {
 console.log(twoSum(nums, target))
 
 
+function lonelyinteger(a) {
+    let count = 0;
+    for(let i = 0; i < a.length; i++) {
+        for(let j = 0; j < a.length; j++) {
+            if(a[i] === a[j]) count++
+        }
+        if(count < 2) return a[i]
+        count = 0
+    }
+}
 
+// console.log(lonelyinteger(a))
 
 
