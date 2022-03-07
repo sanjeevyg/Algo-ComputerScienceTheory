@@ -773,3 +773,10 @@ c.right = f;
  }
 
 //  console.log(treeIncludesRecursieveMethod("e", a))
+
+const depthFirstValues2nd = (root) => {
+    if(root === null) return [];
+    const leftValues = depthFirstValues2nd(root.left) 
+    const rightValues = depthFirstValues2nd(root.right) 
+    return [root.val, ...leftValues, ...rightValues]
+ }
