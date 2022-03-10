@@ -167,3 +167,13 @@ c.right = f;
         return root.val + largest
     }
     console.log(maxPathSum(a)) 
+
+
+
+ const treeIncludesRecursieveMethod = (target, root) => {
+    if(root === null) return false;
+    if(root.val === target) return true;
+    return treeIncludesRecursieveMethod(target, root.left) || treeIncludesRecursieveMethod(target, root.right)
+}
+
+//  console.log(treeIncludesRecursieveMethod("e", a))
