@@ -231,17 +231,17 @@ const findValueAtIndexRecurrsive = (head, index) => {
 // console.log(findValueAtIndex(a, 2))
 // console.log(findValueAtIndexRecurrsive(a, 2))
 
-const reverseTheLinkedList = (head) => {
-    let current = head;
-    let prev = null;
-    while(current != null) {
-        const next = current.next;
-        current.next = prev;
-        prev = current;
-        current = next;
-    }
-    return prev;
-}
+// const reverseTheLinkedList = (head) => {
+//     let current = head;
+//     let prev = null;
+//     while(current != null) {
+//         const next = current.next;
+//         current.next = prev;
+//         prev = current;
+//         current = next;
+//     }
+//     return prev;
+// }
 
 const reverseTheLinkedListRecurssive = (head, prev = null) => {
     if(head === null) return prev;
@@ -331,7 +331,7 @@ const twoSum = (nums, target) => {
     }
 }
 
-console.log(twoSum(nums, target))
+// console.log(twoSum(nums, target))
 
 
 function lonelyinteger(a) {
@@ -348,3 +348,25 @@ function lonelyinteger(a) {
 // console.log(lonelyinteger(a))
 
 
+const reverseTheLinkedList = (head) => {
+  let current = head;
+  let prev = null;
+  while(current != null) {
+      let next = current.next
+      current.next = prev;
+      prev = current;
+      current = next
+  }
+  return prev
+}
+
+// console.log(reverseTheLinkedList(a))
+
+const reverseTheLinkedListA = (head, prev=null) => {
+    if(head === null) return prev;
+    let next = head.next;
+    head.next = prev
+    return reverseTheLinkedListA(next, head)
+}
+
+console.log(reverseTheLinkedListA(a))
