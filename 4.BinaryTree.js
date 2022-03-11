@@ -177,3 +177,18 @@ c.right = f;
 }
 
 //  console.log(treeIncludesRecursieveMethod("e", a))
+
+
+const treeIncludes = (target, root) => {
+    if(root === null) return false
+    let queue = [root]
+    while(queue.length > 0) {
+       const current = queue.shift();
+       if (current.val === target) return true
+       if(current.left) queue.push(current.left) 
+       if(current.right) queue.push(current.right) 
+    }
+    return false
+}
+
+//  console.log(treeIncludes("e", a))
