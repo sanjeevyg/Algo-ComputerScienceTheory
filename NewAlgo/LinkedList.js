@@ -6,31 +6,31 @@ class Node {
 }
 
 
-let a = new Node(1);
+let a = new Node(7);
 let b = new Node(2);
 let c = new Node(2);
 let d = new Node(5);
 let e = new Node(5);
-let f = new Node(7);
-let g = new Node(9);
+let f = new Node(9);
+// let g = new Node(9);
 
 a.next = b;
 b.next = c;
 c.next = d;
 d.next = e;
 e.next = f;
-f.next = g;
+// f.next = g;
 
-const x = new Node(1)
-const y = new Node(2)
-// const z = new Node(3)
-// const m = new Node(4)
-// const n = new Node(5)
+const x = new Node(21)
+const y = new Node(22)
+const z = new Node(9)
+const m = new Node(36)
+const n = new Node(86)
 
 x.next = y;
-// y.next = z;
-// z.next = m;
-// m.next = n;
+y.next = z;
+z.next = m;
+m.next = n;
 // n.next = y;
 
 
@@ -159,20 +159,90 @@ Return true if there is a cycle in the linked list. Otherwise, return false. */
 
 
 var hasCycle = function(head) {
-    let pointer1 = head;
-    let pointer2 = head;
-    if(head === null) return false;
-    if(head.next === null) return false;
+    // let pointer1 = head;
+    // let pointer2 = head;
+    // if(head === null) return false;
+    // if(head.next === null) return false;
 
-    while(pointer2 && pointer2.next && pointer2.next.next) {
-        pointer1 = pointer1.next;
-        pointer2 = pointer2.next.next;
+    // while(pointer2 && pointer2.next && pointer2.next.next) {
+    //     pointer1 = pointer1.next;
+    //     pointer2 = pointer2.next.next;
 
-        if(pointer1 == pointer2) {
-            return true
-        }
-    }
-    return false
+    //     if(pointer1 == pointer2) {
+    //         return true
+    //     }
+    // }
+    // return false
 };
 
-console.log(hasCycle(x))
+// console.log(hasCycle(x))
+
+
+var hasCycle = function(head) {
+   let map = new Map();
+   while(head != null) {
+       if(map.has(head)) {
+           return true
+       } 
+       map.set(head, head)   
+       head = head.next
+   }
+   return false
+};
+
+// console.log(hasCycle(x))
+
+
+/* 160. Intersection of Two Linked Lists
+
+Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.
+
+For example, the following two linked lists begin to intersect at node c1: */
+
+var getIntersectionNode = function(headA, headB) {
+    if(headA == null || headB == null) return null;
+
+    let set1 = new Set();
+
+    while(headA) {
+        set1.add(headA)
+        headA = headA.next
+    }
+
+    while(headB) {
+        if(set1.has(headB)) {
+            return headB
+        }
+        headB = headB.next
+    }
+    return null
+};
+
+// console.log(getIntersectionNode(a, x))
+
+/* 
+203. Remove Linked List Elements
+
+Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.
+ */
+
+
+var removeElements = function(head, val) {
+    if(head === null) return null;
+    let node = new Node()
+    node.next = head;
+    let prev = node;
+    let current = head;
+
+    while(current != null) {
+        if(current.val === val) {
+            prev.next = current.next;
+        } else {
+            prev = current;
+        }
+        current = current.next
+    }
+    return node.next
+};
+
+console.log(removeElements(a, 5))
