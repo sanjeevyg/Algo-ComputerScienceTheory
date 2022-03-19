@@ -370,3 +370,10 @@ const reverseTheLinkedListA = (head, prev=null) => {
 }
 
 console.log(reverseTheLinkedListA(a))
+
+
+const printNodesRecurrsive = (head) => {
+    if(head === null) return;
+    console.log(head.val);
+    printNodes(head.next)
+}

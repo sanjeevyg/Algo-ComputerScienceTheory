@@ -1,18 +1,17 @@
-class Node {
+class ListNode {
     constructor(val) {
         this.val = val;
         this.next = null;
     }
 }
 
-
-let a = new Node(7);
-let b = new Node(2);
-let c = new Node(2);
-let d = new Node(5);
-let e = new Node(5);
-let f = new Node(9);
-// let g = new Node(9);
+let a = new ListNode(7);
+let b = new ListNode(2);
+let c = new ListNode(3);
+let d = new ListNode(3);
+let e = new ListNode(2);
+let f = new ListNode(7);
+// let g = new ListNode(7);
 
 a.next = b;
 b.next = c;
@@ -21,11 +20,11 @@ d.next = e;
 e.next = f;
 // f.next = g;
 
-const x = new Node(21)
-const y = new Node(22)
-const z = new Node(9)
-const m = new Node(36)
-const n = new Node(86)
+const x = new ListNode(21)
+const y = new ListNode(22)
+const z = new ListNode(9)
+const m = new ListNode(36)
+const n = new ListNode(86)
 
 x.next = y;
 y.next = z;
@@ -91,8 +90,8 @@ Return the head of the merged linked list. */
 
 
 var mergeTwoLists = function(list1, list2) {
-   let tail = new Node()
-   let head = new Node()
+   let tail = new ListNode()
+   let head = new ListNode()
 
    if(list1 === null && list2 === null) return null;
    if(list1 === null) return list2;
@@ -159,26 +158,26 @@ Return true if there is a cycle in the linked list. Otherwise, return false. */
 
 
 var hasCycle = function(head) {
-    // let pointer1 = head;
-    // let pointer2 = head;
-    // if(head === null) return false;
-    // if(head.next === null) return false;
+    let pointer1 = head;
+    let pointer2 = head;
+    if(head === null) return false;
+    if(head.next === null) return false;
 
-    // while(pointer2 && pointer2.next && pointer2.next.next) {
-    //     pointer1 = pointer1.next;
-    //     pointer2 = pointer2.next.next;
+    while(pointer2 && pointer2.next && pointer2.next.next) {
+        pointer1 = pointer1.next;
+        pointer2 = pointer2.next.next;
 
-    //     if(pointer1 == pointer2) {
-    //         return true
-    //     }
-    // }
-    // return false
+        if(pointer1 == pointer2) {
+            return true
+        }
+    }
+    return false
 };
 
 // console.log(hasCycle(x))
 
 
-var hasCycle = function(head) {
+var hasCycleA = function(head) {
    let map = new Map();
    while(head != null) {
        if(map.has(head)) {
@@ -223,13 +222,13 @@ var getIntersectionNode = function(headA, headB) {
 /* 
 203. Remove Linked List Elements
 
-Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.
+Given the head of a linked list and an integer val, remove all the nodes of the linked list that has ListNode.val == val, and return the new head.
  */
 
 
 var removeElements = function(head, val) {
     if(head === null) return null;
-    let node = new Node()
+    let node = new ListNode()
     node.next = head;
     let prev = node;
     let current = head;
@@ -245,4 +244,115 @@ var removeElements = function(head, val) {
     return node.next
 };
 
-console.log(removeElements(a, 5))
+// console.log(removeElements(a, 5))
+
+// Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+var reverseList = function(head) {
+    let prev = null;
+    let current = head;
+    while(current != null) {
+        let next = current.next;
+        current.next = prev;
+        prev = current;
+        current = next;
+    }
+    return prev
+};
+
+var reverseListR = function(head, prev=null) {
+    if(head === null) return prev
+    let next = head.next;
+    head.next = prev;
+    return reverseListR(next, head)
+};
+
+// console.log(reverseListR(a))
+
+/* 234. Palindrome Linked List
+Given the head of a singly linked list, return true if it is a palindrom */
+
+var isPalindrome = function(head) {
+    let count = 0;
+    let current = head;
+    while(current != null) {
+        current = current.next
+        count++
+    }
+
+    let node = head;
+    let array1 = [];
+    let array2 = [];
+
+    if (count % 2 === 0) {
+        let newCount = 0;
+        while(node && newCount != count/2) {
+            array1.push(node.val)
+            node = node.next
+            newCount++
+        }
+        while(node && newCount != count) {
+            array2.push(node.val)
+            node = node.next
+            newCount++
+        }
+    } 
+
+    let prev = new ListNode()
+
+    if (count % 2 !== 0) {
+        let newCount = 0;
+        while(node && newCount != Math.ceil(count/2)) {
+            array1.push(node.val)
+            prev = node;
+            node = node.next
+            newCount++
+        }
+        array2.push(prev.val)
+        while(node && newCount != count) {
+            array2.push(node.val)
+            node = node.next
+            newCount++
+        }
+    } 
+
+    if (array1.length === array2.length && array1.reverse().every((element, index) => element === array2[index] )) return true
+    return false
+};
+
+var isPalindromeR = function(head) {
+    let count = 0;
+    let current = head;
+    while(current != null) {
+        current = current.next
+        count++
+    }
+
+    let head1 = head;
+    let node1 = head1;
+    let head2 = head;
+    let node2 = head2;
+
+    if(current % 2 == 0) {
+        let newcount = 0;
+        while(node1) {
+            if(newcount === count/2) {
+                node1.next = null 
+            } else {
+                node1 = node1.next
+                newcount++
+            }
+        }
+
+        while(node1 && newcount !== count) {
+            node1 = node1.next
+            newcount++
+        }
+
+    }
+   
+
+
+}
+
+console.log(isPalindromeR(a))
