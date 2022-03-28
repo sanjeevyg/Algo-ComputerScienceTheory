@@ -267,60 +267,27 @@ Two binary trees are considered the same if they are structurally identical, and
 
 
 var isSameTree = function(p, q) {
-    let stackOne = [p];
-    let stackTwo = [q];
-
-    let resultP = [];
-    let resultQ = [];
-
-    currentP = p;
-    currentQ = q;
-
-    if(p === null && q === null) return true;
-    if(p === null || q === null) return false
-
-    while(stackOne.length > 0) {
-        let currentP = stackOne.pop()
-        resultP.push(currentP.val)
-
-        if(currentP.left != null) {
-            stackOne.push(currentP.left)
-        } else if(currentP.left === null && currentP.right != null) {
-            resultP.push(null)
-        }
-
-        if(currentP.right != null) {
-            stackOne.push(currentP.right)
-        } else if(currentP.right === null && currentP.left != null) {
-            resultP.push(stackOne.pop().val)
-            resultP.push(null)
-        }
+    let queue = [p, q];
+    while(queue.length > 0) {
+        let first = queue.shift();
+        let second = queue.shift();
+        if(first === null && second === null) continue;
+        if(!first || !second || first.val != second.val) return false;
+        queue.push(first.left)
+        queue.push(second.left)
+        queue.push(first.right)
+        queue.push(second.right)
     }
-
-    while(stackTwo.length > 0) {
-        let currentQ = stackTwo.pop()
-        resultQ.push(currentQ.val)
-
-        if(currentQ.left != null) {
-            stackTwo.push(currentQ.left)
-        } else if(currentQ.left === null && currentQ.right != null) {
-            resultQ.push(null)
-        }
-
-        if(currentQ.right != null) {
-            stackTwo.push(currentQ.right)
-        } else if(currentQ.right === null && currentQ.left != null) {
-            resultQ.push(stackTwo.pop().val)
-            resultQ.push(null)
-        }
-    }
-    console.log(resultP)
-    console.log(resultQ)
-
-    
-    
-    return resultP.length === resultQ && resultP.every((ele, index) => ele === resultQ[index])
-    
+    return true
 };
 
 console.log(isSameTree(a, p))
+
+
+var isSameTreeR = function(p, q) {
+    if(p === null && q === null) return true
+    if(!p || !q || p.val !== q.val) return false
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
+};
+
+console.log(isSameTreeR(a, p))
