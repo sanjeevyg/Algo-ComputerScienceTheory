@@ -12,18 +12,17 @@ class Node {
 }
 
 const a = new Node(1)
-const b = new Node(2)
-const c = new Node(4)
-const d = new Node(1)
-const e = new Node(7)
-const f = new Node(9)
+// const b = new Node(2)
+// const c = new Node(4)
+const p = new Node(1)
+const q = new Node(2)
+// const r = new Node(4)
 
 
-a.left = b;
-a.right = c;
-b.left = d;
-b.right = e;
-c.left = f;
+// a.left = b;
+// a.right = c;
+p.right = q;
+// p.right = r;
 
 function depthFirstSearch(root) {
    if(root === null) return [];
@@ -215,7 +214,7 @@ var searchA = function(nums, target) {
     return -1
 };
 
-console.log(searchA(nums, 9))
+// console.log(searchA(nums, 9))
 
 
 
@@ -241,4 +240,87 @@ var inorderTraversal = function(root) {
     return res
 }
 
-console.log(inorderTraversal(a))
+// console.log(inorderTraversal(a))
+
+
+var inorderTraversalR = function(root) {
+  let result = [];
+  helper(root, result)
+  return result
+}
+
+const helper = (root, result) => {
+    if(root !== null ) {
+        helper(root.left, result)
+        result.push(root.val)
+        helper(root.right, result)
+    }
+}
+
+// console.log(inorderTraversalR(a))
+
+
+
+/* Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value. */
+
+
+var isSameTree = function(p, q) {
+    let stackOne = [p];
+    let stackTwo = [q];
+
+    let resultP = [];
+    let resultQ = [];
+
+    currentP = p;
+    currentQ = q;
+
+    if(p === null && q === null) return true;
+    if(p === null || q === null) return false
+
+    while(stackOne.length > 0) {
+        let currentP = stackOne.pop()
+        resultP.push(currentP.val)
+
+        if(currentP.left != null) {
+            stackOne.push(currentP.left)
+        } else if(currentP.left === null && currentP.right != null) {
+            resultP.push(null)
+        }
+
+        if(currentP.right != null) {
+            stackOne.push(currentP.right)
+        } else if(currentP.right === null && currentP.left != null) {
+            resultP.push(stackOne.pop().val)
+            resultP.push(null)
+        }
+    }
+
+    while(stackTwo.length > 0) {
+        let currentQ = stackTwo.pop()
+        resultQ.push(currentQ.val)
+
+        if(currentQ.left != null) {
+            stackTwo.push(currentQ.left)
+        } else if(currentQ.left === null && currentQ.right != null) {
+            resultQ.push(null)
+        }
+
+        if(currentQ.right != null) {
+            stackTwo.push(currentQ.right)
+        } else if(currentQ.right === null && currentQ.left != null) {
+            resultQ.push(stackTwo.pop().val)
+            resultQ.push(null)
+        }
+    }
+    console.log(resultP)
+    console.log(resultQ)
+
+    
+    
+    return resultP.length === resultQ && resultP.every((ele, index) => ele === resultQ[index])
+    
+};
+
+console.log(isSameTree(a, p))
