@@ -12,17 +12,20 @@ class Node {
 }
 
 const a = new Node(1)
-// const b = new Node(2)
-// const c = new Node(4)
-const p = new Node(1)
-const q = new Node(2)
-// const r = new Node(4)
+const b = new Node(2)
+const c = new Node(2)
+const d = new Node(3)
+const e = new Node(4)
+const f = new Node(4)
+const g = new Node(3)
 
 
-// a.left = b;
-// a.right = c;
-p.right = q;
-// p.right = r;
+a.left = b;
+a.right = c;
+b.left = d;
+b.right = e;
+c.left = f;
+c.right = g;
 
 function depthFirstSearch(root) {
    if(root === null) return [];
@@ -281,7 +284,7 @@ var isSameTree = function(p, q) {
     return true
 };
 
-console.log(isSameTree(a, p))
+// console.log(isSameTree(a, p))
 
 
 var isSameTreeR = function(p, q) {
@@ -290,4 +293,79 @@ var isSameTreeR = function(p, q) {
     return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
 };
 
-console.log(isSameTreeR(a, p))
+// console.log(isSameTreeR(a, p))
+
+
+// Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+
+var isSymmetric = function(root) {
+    let left = root.left;
+    let right = root.right;
+    return helperIsSymmetric(left, right)
+};
+
+function helperIsSymmetric (left, right) {
+    if(left === null && right === null) return true
+    if(!left || !right || left.val !== right.val) return false
+    return helperIsSymmetric(left.left, right.right) && helperIsSymmetric(left.right, right.left)
+}
+
+// console.log(isSymmetric(a))
+
+var isSymmetricI = function(root) {
+    let left = root.left
+    let right = root.right
+    let queue = [left, right]
+
+    while(queue.length > 0) {
+        let first = queue.shift();
+        let second = queue.shift()
+        if(!first && !second) continue;
+        if(!first || !second || first.val !== second.val) return false
+        queue.push(first.left)
+        queue.push(second.right)
+        queue.push(first.right)
+        queue.push(second.left)
+    }
+    return true
+};
+
+// console.log(isSymmetricI(a))
+
+
+
+/* Maximum Depth of Binary Tree
+
+Given the root of a binary tree, return its maximum depth.
+
+A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node. */
+
+var maxDepth = function(root, count = 0) {
+    if(root === null) return count
+    count = count + 1
+    return Math.max(maxDepth(root.left, count), maxDepth(root.right, count))
+};
+
+console.log(maxDepth(a))
+
+
+var maxDepthI = function(root) {
+    let countOne = 1;
+    let countTwo = 1;
+    // let left = root.left;
+    let right = root.right
+    let stack = [root]
+    while(queue.length > 0) {
+        let current = stack.pop()
+        if(current !== right) { 
+            countOne++
+        } else {
+            countTwo++
+        }
+
+        if(current.right !== null) stack.push(current.right)
+        if(current.left !== null) stack.push(current.left)
+    }
+};
+
+console.log(maxDepthI(a))
