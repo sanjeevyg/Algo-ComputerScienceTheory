@@ -37,7 +37,7 @@ const breadthFirstPrint = (graph, source) => {
         console.log(current)
 
         for(let neighbor of graph[current]) {
-            queue.push(neighbor)
+            queue.push(neighbor) 
         }
     }
 }
@@ -111,6 +111,7 @@ const undirectedPath = (edges, src, dist) => {
 const hasPathUn = (graph, src, dist, visited) => {
     if(src === dist) return true;
     if(visited.has(src)) return false;
+    visited.add(src);
     for(let neighbor of graph[src]) {
         if(hasPath(graph, neighbor, dist, visited) === true) return true
     }
