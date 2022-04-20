@@ -132,4 +132,72 @@ const buildGraph = (edges) => {
 }
 
 
-console.log(undirectedPath(edges, 'j', 'm'))
+// console.log(undirectedPath(edges, 'j', 'm'))
+
+
+let graph3 = {
+    0: [8, 1, 5],
+    1: [0],
+    5: [0, 8],
+    8: [0, 5],
+    2: [3, 4],
+    3: [2, 4],
+    4: [3, 2]
+}
+
+const connectedComponentsCount = (graph) => {
+    let visited = new Set();
+    let count = 0;
+    for(let node in graph) {
+        if (explore(graph, node, visited) === true) {
+            count++
+        }
+    }
+    return count
+}
+
+const explore = (graph, current, visited) => {
+    if(visited.has(String(current))) return false
+    visited.add(String(current))
+    for(let neighbor of graph[current]) {
+        explore(graph, neighbor, visited)
+    }
+    return true
+}
+
+// console.log(connectedComponentsCount(graph3))
+
+let graph4 = {
+    0: ['8', '1', '5'],
+    1: ['0'],
+    5: ['0', '8'],
+    8: ['0', '5'],
+    2: ['3', '4'],
+    3: ['3', '4'],
+    4: ['3', '2']
+}
+
+const largestComponent = (graph) => {
+    let visited = new Set();
+    let largest = 0;
+    for(let node in graph) {
+        let size = exploreNode(graph, node, visited)
+        if (size > largest) {
+            largest = size
+        }
+    }
+    return largest
+}
+
+const exploreNode = (graph, node, visited) => {
+    if(visited.has(node)) return 0
+    let size = 1;
+    visited.add(node)
+    for(let neighbor of graph[node]) {
+        size += exploreNode(graph, neighbor, visited)
+    }
+    return size
+}
+
+
+console.log(largestComponent(graph4))
