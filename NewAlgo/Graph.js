@@ -200,4 +200,52 @@ const exploreNode = (graph, node, visited) => {
 }
 
 
-console.log(largestComponent(graph4))
+// console.log(largestComponent(graph4))
+
+
+const edges1 = [
+    ['w', 'x'],
+    ['x', 'y'],
+    ['z', 'y'],
+    ['z', 'v'],
+    ['w', 'v']
+];
+
+const shortestPath = (edges, nodeA, nodeB) => {
+    const graph = buildGraph1(edges);
+    const visited = new Set([nodeA]);
+    const queue = [[nodeA, 0]];
+
+    while(queue.length > 0) {
+        const [current, distance] = queue.shift();
+
+        if(current === nodeB) return distance;
+
+        for(let neighbor of graph[current]) {
+            if(!visited.has(neighbor)) {
+                visited.add(neighbor)
+                queue.push([neighbor, distance + 1])
+            }
+        }
+    }
+    return -1 
+}
+
+const buildGraph1 = (edges) => {
+    let graph = {};
+
+    for(let edge of edges) {
+        let [a, b] = edge;
+
+        if(!(a in graph)) graph[a] = [];
+        if(!(b in graph)) graph[b] = [];
+        graph[a].push(b)
+        graph[b].push(a)
+    }
+   return graph
+}
+
+console.log(shortestPath(edges1, 'w', 'z'))
+
+// console.log(buildGraph(edges1))
+    
