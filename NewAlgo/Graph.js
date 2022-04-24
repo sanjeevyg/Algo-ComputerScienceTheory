@@ -245,15 +245,91 @@ const buildGraph1 = (edges) => {
    return graph
 }
 
-console.log(shortestPath(edges1, 'w', 'z'))
+// console.log(shortestPath(edges1, 'w', 'z'))
 
 // console.log(buildGraph(edges1))
 
 let grid = [
-    ['W', 'L', 'W', 'W', 'L', 'W'],
-    ['L', 'L', 'W', 'W', 'L', 'W'],
-    ['W', 'L', 'W', 'W', 'W', 'W'],
-    ['W', 'W', 'W', 'L', 'L', 'W'],
-    ['W', 'L', 'W', 'L', 'L', 'W'],
-    ['W', 'W', 'W', 'W', 'W', 'W'],
+    ['W', 'L', 'W', 'W', 'W'],
+    ['W', 'L', 'L', 'W', 'W'],
+    ['W', 'W', 'W', 'L', 'W'],
+    ['W', 'W', 'L', 'L', 'W'],
+    ['L', 'W', 'W', 'L', 'L'],
+    ['L', 'L', 'W', 'W', 'W']
 ]
+
+const isLandCount = (grid) => {
+    const visited = new Set();
+    let count = 0;
+    for(let r = 0; r < grid.length; r+= 1) {
+        for(let c = 0; c < grid[0].length; c+= 1) {
+            if(exploreGrid(grid, r, c, visited) === true) {
+                count += 1
+            }
+        }
+    }
+    return count;
+}
+
+const exploreGrid = (grid, r, c, visited) => {
+    const rowBound = 0 <= r && r < grid.length;
+    const columnBound = 0 <= c && c < grid[0].length;
+    if(!rowBound || !columnBound) return false;
+
+    if(grid[r][c] === 'W') return false;
+
+    const pos = r + ',' + c;
+    if(visited.has(pos)) return false;
+    visited.add(pos);
+
+    exploreGrid(grid, r - 1, c, visited);
+    exploreGrid(grid, r + 1, c, visited);
+    exploreGrid(grid, r, c - 1, visited);
+    exploreGrid(grid, r, c + 1, visited);
+
+    return true
+}
+
+
+console.log(isLandCount(grid))
+
+
+const minimumIsland = (grid) => {
+    const visited = new Set();
+    let minimum = Infinity;
+
+    for(let r = 0; r < grid.length; r++) {
+        for(let c = 0; c < grid[0].length; c++) {
+            let size = exploreMin(grid, r, c, visited)
+            if( size > 0 && size < minimum)  {
+                minimum = size
+            }
+        }
+    }
+
+    return minimum
+}
+
+const exploreMin = (grid, r, c, visited) => {
+    const rowBount = 0 <= r && r < grid.length;
+    const columnBount = 0 <= c && c < grid[0].length;
+    if(!rowBount || !columnBount) return 0;
+
+    if(grid[r][c] === 'W') return 0;
+
+    const pos = r + ',' + c
+    if(visited.has(pos)) return 0;
+    visited.add(pos)
+
+    let size = 1;
+
+    size += exploreMin(grid, r - 1, c, visited)
+    size += exploreMin(grid, r + 1, c, visited)
+    size += exploreMin(grid, r, c -1, visited)
+    size += exploreMin(grid, r, c + 1, visited)
+
+    return size; 
+}
+
+
+console.log(minimumIsland(grid))
