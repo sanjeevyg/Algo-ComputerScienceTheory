@@ -248,4 +248,12 @@ const buildGraph1 = (edges) => {
 console.log(shortestPath(edges1, 'w', 'z'))
 
 // console.log(buildGraph(edges1))
-    
+
+let grid = [
+    ['W', 'L', 'W', 'W', 'L', 'W'],
+    ['L', 'L', 'W', 'W', 'L', 'W'],
+    ['W', 'L', 'W', 'W', 'W', 'W'],
+    ['W', 'W', 'W', 'L', 'L', 'W'],
+    ['W', 'L', 'W', 'L', 'L', 'W'],
+    ['W', 'W', 'W', 'W', 'W', 'W'],
+]
