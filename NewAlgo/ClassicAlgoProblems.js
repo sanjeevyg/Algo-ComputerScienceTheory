@@ -46,6 +46,54 @@ function binarySearchRecurssive(arr, start, end, target) {
 let start = 0;
 let end = arr.length - 1
 
-console.log(binarySearchRecurssive(arr, start, end, target))
+// console.log(binarySearchRecurssive(arr, start, end, target))
 
 
+
+const edges = [
+    ['i', 'j'],
+    ['k', 'i'],
+    ['m', 'k'],
+    ['k', 'l'],
+    ['o', 'n'],
+]
+
+
+function breadthFirstSearch(edges, src) {
+    //Make a graph from edges
+    let visited = new Set();
+    const graph = buildGraph(edges);
+    //Use queue to print current node value
+    let queue = [src];
+    
+    //Use for loop to iterate through the nodes
+    while(queue.length > 0) {
+        const current = queue.shift();
+        console.log(current)
+
+        for(let node in graph) {
+            for(let neighbor of graph[node]) {
+                if(!visited.has(neighbor)) {
+                    queue.push(neighbor)
+                    visited.add(neighbor)
+                }
+            }
+        }
+    }
+}
+
+
+const buildGraph = (edges) => {
+    let graph = {};
+    //Use for loop to get the individual element in edges and destructure it 
+    for(let edge of edges) {
+        const [a, b] = edge;
+        if(!(a in graph)) graph[a] = [];
+        if(!(b in graph)) graph[b] = [];
+        graph[a].push(b)
+        graph[a].push(a)
+    }
+    return graph
+}
+
+console.log(breadthFirstSearch(edges, 'i'))
