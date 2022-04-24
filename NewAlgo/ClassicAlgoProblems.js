@@ -70,7 +70,7 @@ function breadthFirstSearch(edges, src) {
     while(queue.length > 0) {
         const current = queue.shift();
         console.log(current)
-
+        if(!visited.has(current)) visited.add(current)
         for(let node in graph) {
             for(let neighbor of graph[node]) {
                 if(!visited.has(neighbor)) {
@@ -96,4 +96,70 @@ const buildGraph = (edges) => {
     return graph
 }
 
-console.log(breadthFirstSearch(edges, 'i'))
+// breadthFirstSearch(edges, 'i')
+
+
+
+function depthFirstSearch(edges, src) {
+   const graph = buildGraphD(edges);
+   const visited = new Set();
+   let stack = [src];
+
+   while(stack.length > 0) {
+       const current = stack.pop()
+       console.log(current)
+       if(!visited.has(current)) visited.add(current)
+
+       for(let node in graph) {
+           for(let neighbor of graph[node]) {
+               if(!visited.has(neighbor)) {
+                   stack.push(neighbor);
+                   visited.add(neighbor)
+               }
+           }
+       }
+   }
+}
+
+const buildGraphD = (edges) => {
+    let graph = {};
+    for(let edge of edges) {
+        const [a, b] = edge;
+        if(!(a in graph)) graph[a] = [];
+        if(!(b in graph)) graph[b] = [];
+
+        graph[a].push(b);
+        graph[b].push(a);
+    }
+    return graph
+}
+
+
+
+// (depthFirstSearch(edges, 'i'))
+
+function depthFirstSearchR(edges, src) {
+    const graph = buildGraphD(edges);
+    const visited = new Set();
+    return explore(graph, src, visited);
+ }
+
+ const explore = (graph, src, visited) => {
+     if(!visited.has(src)) {
+         console.log(src)
+         visited.add(src)
+     }
+    //  console.log(graph)
+
+     for(let node in graph) {
+        for(let neighbor of graph[node])
+            if(!visited.has(neighbor)) {
+                explore(graph, neighbor, visited)
+            }
+     }
+ }
+
+
+
+
+ depthFirstSearchR(edges, 'i')
