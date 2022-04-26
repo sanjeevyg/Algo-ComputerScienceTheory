@@ -246,12 +246,9 @@ const buildGraph1 = (edges) => {
 // console.log(buildGraph(edges1))
 
 let grid = [
-    ['W', 'L', 'W', 'W', 'W'],
-    ['W', 'L', 'L', 'W', 'W'],
-    ['W', 'W', 'W', 'L', 'W'],
-    ['W', 'W', 'L', 'L', 'W'],
-    ['L', 'W', 'W', 'L', 'L'],
-    ['L', 'L', 'W', 'W', 'W']
+    ['W', 'L', 'L', 'L'],
+    ['W', 'L', 'W', 'W'],
+    ['L', 'W', 'L', 'L'],
 ]
 
 const isLandCount = (grid) => {
@@ -285,7 +282,6 @@ const exploreGrid = (grid, r, c, visited) => {
 
     return true
 }
-
 
 console.log(isLandCount(grid))
 
@@ -328,4 +324,4 @@ const exploreMin = (grid, r, c, visited) => {
 }
 
 
-console.log(minimumIsland(grid))
+// console.log(minimumIsland(grid))
