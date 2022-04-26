@@ -159,7 +159,52 @@ function depthFirstSearchR(edges, src) {
      }
  }
 
+//  depthFirstSearchR(edges, 'i')
+
+function mergeSort(array) {
+    const half = array.length/2;
+
+    if(array.length < 2) {
+        return array;
+    }
+
+    const left = array.splice(0, half)
+    return merge(mergeSort(left), mergeSort(array))
+}
 
 
+const merge = (left, right) => {
+    let arr = [];
 
- depthFirstSearchR(edges, 'i')
+    while(left.length && right.length) {
+        if(left[0] < right[0]) {
+            arr.push(left.shift())
+        } else {
+            arr.push(right.shift())
+        }
+    }
+  return [...arr, ...left, ...right]
+}
+
+
+// console.log(mergeSort([1, 5, 17, 9, 7]))
+// console.log(mergeSort([1, 5, 17, 9, 7, 23, 25]))
+
+
+function quickSort(array) {
+    if(array.length < 2) {
+        return array
+    }
+
+    let left = [];
+    let right = [];
+    let pivot = array[array.length - 1]
+
+    for(let ele of array.slice(0, array.length - 1)) {
+        ele < pivot ? left.push(ele) : right.push(ele)
+    }
+
+    return [...quickSort(left), pivot, ...quickSort(right)]
+}
+
+console.log(quickSort([7, -2, 4, 1, 6, 5, 0, -4, 2]))
