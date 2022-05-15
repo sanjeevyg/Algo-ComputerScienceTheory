@@ -30,12 +30,12 @@ const d = new Node('d')
 const e = new Node('e')
 const f = new Node('f')
 
-const a = new Node(2)
-const b = new Node(5)
-const c = new Node(7)
-const d = new Node(9)
-const e = new Node(12)
-const f = new Node(14)
+// const a = new Node(2)
+// const b = new Node(5)
+// const c = new Node(7)
+// const d = new Node(9)
+// const e = new Node(12)
+// const f = new Node(14)
 
 a.left = b;
 a.right = c;
