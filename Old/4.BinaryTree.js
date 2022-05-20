@@ -170,39 +170,3 @@ c.right = f;
 
 
 
- const treeIncludesRecursieveMethod = (target, root) => {
-    if(root === null) return false;
-    if(root.val === target) return true;
-    return treeIncludesRecursieveMethod(target, root.left) || treeIncludesRecursieveMethod(target, root.right)
-}
-
-//  console.log(treeIncludesRecursieveMethod("e", a))
-
-
-const treeIncludes = (target, root) => {
-    if(root === null) return false
-    let queue = [root]
-    while(queue.length > 0) {
-       const current = queue.shift();
-       if (current.val === target) return true
-       if(current.left) queue.push(current.left) 
-       if(current.right) queue.push(current.right) 
-    }
-    return false
-}
-
-//  console.log(treeIncludes("e", a))
-
-const breadthFirstValues = ( root ) => {
-    let result = [];
-    if(root === null) return []
-    let queue = [root];
-    while(queue.length > 0) {
-        const current = queue.shift()
-        result.push(current.val)
-        if(current.left) queue.push(current.left)
-        if(current.right) queue.push(current.right)
-    }
-    return result
-    
-}
