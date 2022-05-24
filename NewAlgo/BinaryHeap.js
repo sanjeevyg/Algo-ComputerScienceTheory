@@ -4,3 +4,44 @@
 
 
 
+//Insert to a Max Binary Heap
+//Steps -
+//Make a class MaxBinaryHeap with constructor of values
+//Make a insert method
+//Make a bubble method
+
+
+class MaxBinaryHeap {
+    constructor() {
+        this.values = [49, 39, 33, 18, 27, 12, 55];
+    }
+
+    insert(element) {
+        this.values.push(element);
+        this.bubbleUp();
+    }
+
+    bubbleUp() {
+        //Find a last index 
+        //Find a parent index
+        //Find a inserted value and value at parent index. If value at parent index is less, swith the values with child index. 
+        //Repeat the last step until maxBinary heap is achieved
+        let idx = this.values.length - 1;
+        const element = this.values[idx];
+        
+        while(idx > 0) {
+            let parentIdx = Math.floor((idx - 1)/2)
+            const parent = this.values[parentIdx]
+            if(parent >= element) break;
+            this.values[parentIdx] = element;
+            this.values[idx] = parent;
+            idx = parentIdx
+        }
+    }
+}
+
+let heap = new MaxBinaryHeap()
+heap.insert(99)
+heap.insert(14)
+heap.insert(36)
+console.log(heap)
