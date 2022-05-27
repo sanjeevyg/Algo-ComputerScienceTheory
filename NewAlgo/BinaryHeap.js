@@ -13,7 +13,7 @@
 
 class MaxBinaryHeap {
     constructor() {
-        this.values = [49, 39, 33, 18, 27, 12, 55];
+        this.values = [49, 39, 33, 18, 27, 12];
     }
 
     insert(element) {
@@ -22,10 +22,6 @@ class MaxBinaryHeap {
     }
 
     bubbleUp() {
-        //Find a last index 
-        //Find a parent index
-        //Find a inserted value and value at parent index. If value at parent index is less, swith the values with child index. 
-        //Repeat the last step until maxBinary heap is achieved
         let idx = this.values.length - 1;
         const element = this.values[idx];
         
@@ -38,10 +34,51 @@ class MaxBinaryHeap {
             idx = parentIdx
         }
     }
+
+    remove() {
+        let first = this.values[0];
+        let end = this.values.pop();
+        if(this.values.length > 0) {
+            this.values[0] = end;
+            this.sinkDown()
+        }
+        return first
+    }
+        
+    sinkDown() {
+        let idx = 0;
+        while(idx < this.values.length) {
+            let parent = this.values[idx]
+            let l = this.values.length
+            let leftIdx = 2*idx + 1;
+            let rightIdx = 2*idx + 2;
+            let swap = null;
+            let leftChild;
+            let rightChild;
+
+            if(leftIdx < l) {
+                leftChild = this.values[leftIdx]
+                if(leftChild > parent) {
+                    swap = leftIdx;
+                }
+            }
+
+            if(rightIdx < l) {
+                rightChild = this.values[rightIdx]
+                if(swap === null && rightChild > parent || 
+                    swap != null && rightChild > leftChild) {
+                    swap = rightIdx
+                }
+            }
+            if(swap === null) break;
+            this.values[idx] = this.values[swap]
+            this.values[swap] = parent
+            idx = swap;
+        }
+    }
 }
 
+
 let heap = new MaxBinaryHeap()
-heap.insert(99)
-heap.insert(14)
-heap.insert(36)
+console.log(heap.remove())
 console.log(heap)
