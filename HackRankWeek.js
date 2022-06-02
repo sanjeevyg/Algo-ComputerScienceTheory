@@ -94,33 +94,38 @@ console.log(towerBreakers(1, 4)) //2
 
 
 function caesarCipher(s, k) {
-    //If capital 
-    let ucUL = "Z".charCodeAt(0)
-    let ucLL = "A".charCodeAt(0)
-    let lcUL = "z".charCodeAt(0)
-    let lcLL = "a".charCodeAt(0)
-    // console.log(ucUL, ucLL, lcUL, lcLL)
-    let str = ""
-    for(let i = 0; i < s.length; i++) {
-        let char = s[i].charCodeAt(0)
-        // console.log("char first ", char)
-        // console.log("char + k", char + k)
-        if(ucLL <= char && char <= ucUL) {
-            if(char + k > ucUL) {
-                char = (char + k - ucUL) % (ucUL - ucLL) + ucLL - 1
-            } else {
-                char = char + k
+    let ulU = "Z".charCodeAt(0)
+    let llU = "A".charCodeAt(0)
+    let ulL = "z".charCodeAt(0)
+    let llL = "a".charCodeAt(0)
+    k = k % 26;
+
+    let ans = s.split("");
+    let remainder = 0;
+    
+    for(let i = 0; i < ans.length; i++) {
+        let code = ans[i].charCodeAt();
+
+        let char = ans[i].toUpperCase();
+        let iscNum = char.charCodeAt();
+
+        if(iscNum < llU || iscNum > ulU) continue;
+
+        if(iscNum + k > ulU) {
+            remainder = iscNum + k - ulU - 1; 
+
+            if(llL <= code && code <= ulL) {
+                ans[i] = String.fromCharCode(llL + remainder)
+            } else if(llU <= code && code <= ulU) {
+                ans[i] = String.fromCharCode(llU + remainder)
             }
-        } 
-        if(lcLL <= char  && char <= lcUL) {
-            if(char + k > lcUL) {
-                char = (char + k - lcUL) % (lcUL - lcLL) + lcLL - 1
-            } else {
-                char = char + k
-            }
+        } else {
+            
+            ans[i] = String.fromCharCode(code + k)
         }
-        // console.log("char second", char)
-        str = str + String.fromCharCode(char)
+
     }
-    return str
+    return ans.join("")
 }
+
+console.log(caesarCipher("middle-Outz", 2))
