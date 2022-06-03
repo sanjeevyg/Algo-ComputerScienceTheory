@@ -1,7 +1,6 @@
 
 
 function bubbleSort(ar) {
-
     let swap = (ar, k, l) => {
         [ar[k], ar[l]] = [ar[l], ar[k]]
 
