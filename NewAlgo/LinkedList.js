@@ -90,40 +90,25 @@ Return the head of the merged linked list. */
 
 
 var mergeTwoLists = function(list1, list2) {
-   let tail = new ListNode()
-   let head = new ListNode()
-
-   if(list1 === null && list2 === null) return null;
-   if(list1 === null) return list2;
-   if(list2 === null) return list1;
-
-   if(list1.val < list2.val) {
-       head.next = list1;
-   } else {
-       head.next = list2;
-   }
-
-   let current1 = list1
-   let current2 = list2
-
-   while(current1 != null && current2 != null) {
-       if(current1.val < current2.val) {
-            tail.next = current1;
-            current1 = current1.next;
-       } else  {
-           tail.next = current2
-           current2 = current2.next
-       }
-       tail = tail.next
-   }
-
-   if(current1 != null) tail.next = current1
-   if(current2 != null) tail.next = current2
-
-   return head.next
+    let preNode = new ListNode();
+    let prev = preNode;
+    
+    while(list1 != null && list2 != null) {
+        if(list1.val <= list2.val) {
+            prev.next = list1;
+            list1 = list1.next;
+        } else {
+            prev.next = list2;
+            list2 = list2.next;
+        }
+        prev = prev.next;
+    }
+    if(list1 != null) prev.next = list1;
+    if(list2 != null) prev.next = list2;
+    return preNode.next;
 };
 
-// console.log(mergeTwoLists(a, x))
+console.log(mergeTwoLists(a, x))
 
 /* 
 83. Remove Duplicates from Sorted List
