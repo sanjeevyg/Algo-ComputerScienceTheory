@@ -191,20 +191,56 @@ const merge = (left, right) => {
 // console.log(mergeSort([1, 5, 17, 9, 7, 23, 25]))
 
 
-function quickSort(array) {
-    if(array.length < 2) {
-        return array
+//Method 1 - Swapping
+function quickSort(array, left = 0, right = array.length - 1) {
+    if(left < right) {
+        let pivotIndex = pivot(array, left, right)
+        quickSort(array, left, pivotIndex - 1)
+        quickSort(array, pivotIndex + 1)
     }
+    return array
+}
 
+const pivot = (array, start = 0, end = array.length - 1) => {
+    let pivot = array[start];
+    
+    let swap = (array, i, j) => {
+        [array[i], array[j]] = [array[j], array[i]]
+    }
+    
+    let swapIndex = start;
+    
+    for(let i = start + 1; i < array.length; i++) {
+        if(pivot > array[i]) {
+            swapIndex++
+            swap(array, i, swapIndex)
+        }
+    }
+    swap(array, start, swapIndex)
+    
+    return swapIndex
+}
+
+
+// console.log(quickSort([7, -2, 4, 1, 6, 5, 0, -4, 2]))
+
+function quickSortMTwo(array) {
+    if(array.length < 2) return array;
+    
     let left = [];
     let right = [];
-    let pivot = array[array.length - 1]
-
-    for(let ele of array.slice(0, array.length - 1)) {
-        ele < pivot ? left.push(ele) : right.push(ele)
+    
+    let pivot = array.pop()
+    
+    for(let i = 0; i < array.length; i++) {
+        if(pivot < array[i]) {
+            left.push(array[i])
+        } else {
+            right.push(array[j])
+        }
     }
-
-    return [...quickSort(left), pivot, ...quickSort(right)]
+    
+    return [...quickSortMTwo(left), pivot, ...quickSortMTwo(right)]
 }
 
 console.log(quickSort([7, -2, 4, 1, 6, 5, 0, -4, 2]))

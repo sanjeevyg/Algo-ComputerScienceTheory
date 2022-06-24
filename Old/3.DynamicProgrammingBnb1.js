@@ -21,8 +21,20 @@ function fib(n, memo = {}) {
 }
 
 
-// console.log(fib(7))
-// console.log(fib(50))
+function fibB(n) {
+    let table = Array(n + 1).fill(0);
+    table[1] = 1;
+
+    for(let i = 0; i <= n; i++) {
+        table[i + 1] += table[i]; 
+        table[i + 2] += table[i];
+    }
+    return table[n]
+}
+
+
+console.log(fibB(7))
+console.log(fib(50))
 
 
 /* Say that you are a traveler on a 2D grid. You begin in the top-left corner and your goal is to travel to the bottom-right corner. You may only move down or right.
@@ -53,7 +65,7 @@ function travelGrid(m, n, memo = {}) {
 /* Write a function `canSum(targetSum, numbers)` that takes in a targetsum and an array of numbers as arguments.indexOf
 
 The function should return a boolean indicating whether or not it is possible to generate the targetSum using numbers from the array.
-You may use an element of the array as many times as needed.indexOf
+You may use an element of the array as many times as needed.
 
 You may assume that all input numbers are nonnegative.
  */
@@ -66,8 +78,9 @@ function canSum(targetSum, numbers, memo={}){
     for (let num of numbers) {
         const remainder =  targetSum - num
         if(canSum(remainder, numbers, memo) === true) {
-        memo[targetSum] = true
-        return true 
+            // memo[remainder] = true
+            memo[targetSum] = true
+            return true 
         }
     }
 
@@ -79,9 +92,10 @@ function canSum(targetSum, numbers, memo={}){
 // const arr2 = [3, 6, 7, 8]
 // const arr3 = [3, 6, 7]
 
-/* console.log(canSum(7, [2, 3]))
-console.log(canSum(100,arr2))
-console.log(canSum(1000, arr3)) */
+// console.log(canSum(7, [2, 3]))
+// console.log(canSum(7, [2, 9]))
+// console.log(canSum(100,arr2))
+// console.log(canSum(1000, arr3))
 
 /* Write a function `howSum(targetSum, numbers)` that takes in a targetSum and an array of numbers as arguments. 
 The function should return an array containing any combination of elements that add up to exactly the targeSum. 
@@ -108,7 +122,7 @@ const howSum = (targetSum, numbers, memo={}) => {
 }
 
 
-console.log(howSum(7, [3, 4, 2, 5]))
+// console.log(howSum(7, [3, 4, 2, 5]))
 // console.log(howSum(300, [2, 3, 5]))
 
 
