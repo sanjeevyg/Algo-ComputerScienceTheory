@@ -161,35 +161,6 @@ function depthFirstSearchR(edges, src) {
 
 //  depthFirstSearchR(edges, 'i')
 
-function mergeSort(array) {
-    const half = array.length/2;
-
-    if(array.length < 2) {
-        return array;
-    }
-
-    const left = array.splice(0, half)
-    return merge(mergeSort(left), mergeSort(array))
-}
-
-
-const merge = (left, right) => {
-    let arr = [];
-
-    while(left.length && right.length) {
-        if(left[0] < right[0]) {
-            arr.push(left.shift())
-        } else {
-            arr.push(right.shift())
-        }
-    }
-  return [...arr, ...left, ...right]
-}
-
-
-// console.log(mergeSort([1, 5, 17, 9, 7]))
-// console.log(mergeSort([1, 5, 17, 9, 7, 23, 25]))
-
 
 //Method 1 - Swapping
 function quickSort(array, left = 0, right = array.length - 1) {
@@ -243,4 +214,30 @@ function quickSortMTwo(array) {
     return [...quickSortMTwo(left), pivot, ...quickSortMTwo(right)]
 }
 
-console.log(quickSort([7, -2, 4, 1, 6, 5, 0, -4, 2]))
+// console.log(quickSort([7, -2, 4, 1, 6, 5, 0, -4, 2]))
+
+
+function mergeSort(array) {
+
+    let mid = array.length/2
+
+    if(array.length < 2) return array;
+
+    let left = array.splice(0, mid)
+    return merge(mergeSort(left), mergeSort(array))
+}
+
+const merge = (left, right) => {
+    let res = [];
+
+    while(left.length > 0 && right.length > 0) {
+        if(left[0] < right[0]) {
+            res.push(left.shift())
+        } else {
+            res.push(right.shift())
+        }
+    }
+    return [...res, ...left, ...right]
+}
+
+console.log(mergeSort([7, -2, 4, 1, 6, 5, 0, -4, 2]))
